@@ -12,10 +12,24 @@ class Hangman
 
   def play
     setup
-    guess = player2.get_guess(@word_length, @board)
-    matches = player1.respond_to_guess(guess)
-    matches.each {|i| @board[i] = guess}
+    until won?
+      display_board
+      guess = player2.get_guess(@word_length, @board)
+      matches = player1.respond_to_guess(guess)
+      matches.each {|i| @board[i] = guess}
+    end
     display_board
+    puts "Congratulations, the secret word has been discovered!"
+    print "Play again? (Y/N): "
+    input = gets.chomp.downcase
+    until ["y","n"].include?(input)
+      print "Play again? Enter Y or N: "
+    end
+    case input
+      when "y" then Hangman.new.play
+      when "no" then return "Game Over!"
+    end
+    "Game Over."
   end
 
   def setup
@@ -23,7 +37,6 @@ class Hangman
     @word_length = player1.word_length
     @word_length.times {@board << nil}
     display_word_length
-    display_board
   end
 
   def create_new_players(mode)
@@ -76,6 +89,11 @@ class Hangman
     print "\n"
     puts
   end
+
+  def won?
+    @board.all?
+  end
+
 end
 
 class HumanPlayer
@@ -126,7 +144,10 @@ class HumanPlayer
       end
       matches << (match.to_i - 1)
     end
-    matches
+    matches.uniq
+  end
+
+  def handle_guess_response
   end
 end
 
@@ -135,7 +156,7 @@ class ComputerPlayer
     @dictionary = File.readlines('dictionary.txt').map(&:chomp)
     @word = nil
     @guessed_letters = []
-    @possible_words = []
+    @possible_words = @dictionary
   end
 
   def word_length
@@ -158,16 +179,15 @@ class ComputerPlayer
   end
 
   def get_guess(word_length, board)
-    if board.none?
-      @possible_words = @dictionary.select {|word| word.length == word_length}
-    else
-      update_possible_words(board)
-    end
+    update_possible_words(board)
     smart_guess = get_most_frequent_letter(board)
     unless smart_guess.nil?
+      @guessed_letters << smart_guess
       return smart_guess.to_sym
     end
-    random_guess.to_sym
+    random = random_guess
+    @guessed_letters << random
+    random.to_sym
   end
 
   def respond_to_guess(guess)
@@ -175,14 +195,15 @@ class ComputerPlayer
     @word.split("").each_with_index do |letter, i|
       matches << i if letter == guess.to_s
     end
-    matches
+    matches.uniq
+  end
+
+  def handle_guess_response(guess)
+    update_possible_words
   end
 
   def update_possible_words(board)
-    found_letters = {}
-    board.each_with_index do |letter, i|
-      found_letters[i] = letter.to_s.downcase unless letter.nil?
-    end
+    found_letters = get_letters_from_board(board)
 
     new_possible_words = @possible_words
     new_possible_words.each do |word|
@@ -196,24 +217,28 @@ class ComputerPlayer
     @possible_words = new_possible_words
   end
 
-
-  def get_most_frequent_letter(board)
+  def get_letters_from_board(board)
     found_letters = {}
     board.each_with_index do |letter, i|
       found_letters[i] = letter.to_s.downcase unless letter.nil?
     end
+    found_letters
+  end
+
+  def get_most_frequent_letter(board)
+    found_letters = get_letters_from_board(board)
 
     frequencies = Hash.new(0)
     @possible_words.each do |word|
       word.split("").each_with_index do |letter, i|
         if found_letters.include?(i)
-          frequencies[letter] += 1 unless found_letters(i) != letter
+          frequencies[letter] += 1 unless found_letters[i] != letter
         else
           frequencies[letter] += 1
         end
       end
     end
-
+    @guessed_letters.each { |letter| frequencies.delete(letter) }
     highest_frequency = frequencies.values.sort.last
     smart_guess = frequencies.key(highest_frequency)
   end
