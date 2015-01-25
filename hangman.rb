@@ -1,4 +1,6 @@
 class Hangman
+  attr_reader :player1, :player2
+
   def initialize
     @player1 = nil
     @player2 = nil
@@ -7,6 +9,7 @@ class Hangman
 
   def play
     create_new_players(intro_input)
+    player1.secret_word_length
   end
 
   def create_new_players(mode)
@@ -34,11 +37,29 @@ end
 
 class HumanPlayer
   def initialize
+    @secret_word_length = nil
+  end
+
+  def secret_word_length
+    print "Please choose a secret word and enter its length:"
+    input = gets.chomp
+    until (1..25).include?(input.to_i)
+      print "Please enter a valid word length (1-25):"
+    end
+    @secret_word_length = input.to_i
   end
 end
 
 class ComputerPlayer
   def initialize
+    @secret_word = nil
+    @secret_word_length = nil
+  end
+
+  def secret_word_length
+    dictionary = File.readlines('dictionary.txt').map(&:chomp)
+    @secret_word = dictionary.sample
+    @secret_word_length = @secret_word.length
   end
 end
 
