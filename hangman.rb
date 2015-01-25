@@ -12,7 +12,10 @@ class Hangman
 
   def play
     setup
-    player2.get_guess(@word_length, @board)
+    guess = player2.get_guess(@word_length, @board)
+    matches = player1.respond_to_guess(guess)
+    matches.each {|i| @board[i] = guess}
+    display_board
   end
 
   def setup
@@ -66,10 +69,12 @@ class Hangman
   end
 
   def display_board
+    puts
     render_board[0].each {|char| print char}
     print "\n"
     render_board[1].each {|char| print char}
     print "\n"
+    puts
   end
 end
 
@@ -90,18 +95,38 @@ class HumanPlayer
 
   def get_guess(word_length, board)
     print "Please guess a letter (A-Z) "
-    guess = gets.chomp
-    while @guessed_letters.include?(guess.downcase.to_sym)
-      until ("a".."z").to_a.include?(guess.downcase)
+    guess = gets.chomp.downcase
+    while @guessed_letters.include?(guess.to_sym) || !("a".."z").to_a.include?(guess)
+      if !("a".."z").to_a.include?(guess)
         print "Please enter a valid letter! (A-Z) "
-        guess = gets.chomp
+        guess = gets.chomp.downcase
+      else
+        print "You already guessed that letter! Try again. (A-Z) "
+        guess = gets.chomp.downcase
       end
-      print "You already guessed that letter! Try again. (A-Z) "
-      guess = gets.chomp
     end
 
     @guessed_letters << guess.to_sym
-    guess
+    guess.to_sym
+  end
+
+  def respond_to_guess(guess)
+    puts "Your opponent has guessed #{guess.to_s.upcase}!"
+    puts "Please enter any letter numbers where there is a match!"
+    print "Enter 'X' when finished, or if there are no matches:"
+    matches = []
+    loop do
+      match = gets.chomp
+      break if match.upcase == "X"
+      until (0..@word_length).to_a.include?(match.to_i)
+        puts "\nInvalid letter number!"
+        puts "Please enter any letter numbers where there is a match!"
+        print "Enter 'X' when finished, or if there are no matches:"
+        match = gets.chomp
+      end
+      matches << (match.to_i - 1)
+    end
+    matches
   end
 end
 
@@ -128,7 +153,7 @@ class ComputerPlayer
         guess = ("a".."z").to_a.sample
       end
       @guessed_letters << guess.to_sym
-      guess.to_sym
+      guess
     end
   end
 
@@ -138,10 +163,20 @@ class ComputerPlayer
     else
       update_possible_words(board)
     end
-    get_most_frequent_letter(board).to_sym
+    smart_guess = get_most_frequent_letter(board)
+    unless smart_guess.nil?
+      return smart_guess.to_sym
+    end
+    random_guess.to_sym
   end
 
-
+  def respond_to_guess(guess)
+    matches = []
+    @word.split("").each_with_index do |letter, i|
+      matches << i if letter == guess.to_s
+    end
+    matches
+  end
 
   def update_possible_words(board)
     found_letters = {}
@@ -161,6 +196,7 @@ class ComputerPlayer
     @possible_words = new_possible_words
   end
 
+
   def get_most_frequent_letter(board)
     found_letters = {}
     board.each_with_index do |letter, i|
@@ -179,7 +215,7 @@ class ComputerPlayer
     end
 
     highest_frequency = frequencies.values.sort.last
-    frequencies.key(highest_frequency)
+    smart_guess = frequencies.key(highest_frequency)
   end
 end
 
