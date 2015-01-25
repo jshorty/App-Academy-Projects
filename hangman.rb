@@ -4,12 +4,19 @@ class Hangman
   def initialize
     @player1 = nil
     @player2 = nil
-    @secret_word_length = nil
+    @word_length = nil
+    @board = []
   end
 
   def play
+    setup
+  end
+
+  def setup
     create_new_players(intro_input)
-    player1.secret_word_length
+    @word_length = player1.word_length
+    @word_length.times {@board << nil}
+    display_word_length
   end
 
   def create_new_players(mode)
@@ -33,33 +40,49 @@ class Hangman
     end
     return input.to_i
   end
+
+  def display_word_length
+    puts "The secret word is #{word_length} letters long."
+    puts render_board
+  end
+
+  def render_board
+    rendered_board = []
+    @board.each do |letter|
+      if letter.nil?
+        rendered_board << "_"
+      else
+        rendered_board << letter.to_s.upcase
+      end
+    end
+    rendered_board.join(" ")
+  end
 end
 
 class HumanPlayer
   def initialize
-    @secret_word_length = nil
+    @word_length = nil
   end
 
-  def secret_word_length
+  def word_length
     print "Please choose a secret word and enter its length:"
     input = gets.chomp
     until (1..25).include?(input.to_i)
       print "Please enter a valid word length (1-25):"
     end
-    @secret_word_length = input.to_i
+    @word_length = input.to_i
   end
 end
 
 class ComputerPlayer
   def initialize
-    @secret_word = nil
-    @secret_word_length = nil
+    @word = nil
   end
 
-  def secret_word_length
+  def word_length
     dictionary = File.readlines('dictionary.txt').map(&:chomp)
-    @secret_word = dictionary.sample
-    @secret_word_length = @secret_word.length
+    @word = dictionary.sample
+    @word.length
   end
 end
 
