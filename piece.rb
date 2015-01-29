@@ -4,8 +4,8 @@ class InvalidMoveError < StandardError
 end
 
 class Piece
-  attr_reader :color, :board, :king
-  attr_accessor :position
+  attr_reader :color, :board
+  attr_accessor :position, :king
 
   def initialize(color, king, position, board)
     @color = color
@@ -144,29 +144,30 @@ class Piece
     return red if color == :red
   end
 
-  def multi_jumps_path?(end_pos)
-    return false if possible_jumps.empty?
-    return true if possible_jumps.include?(end_pos)
-    possible_jumps.any? do |jump|
-      Piece.new(color, king, jump, board.dup).multi_jumps_path?(end_pos)
-    end
-  end
+  def multi_jumps_path(end_pos, visited)
+    visited << self.position
 
-  def multi_jumps_path?(end_pos)
-    return false if possible_jumps.empty?
-    return true if possible_jumps.include?(end_pos)
-    possible_jumps.any? do |jump|
-      Piece.new(color, king, jump, board.dup).multi_jumps_path?(end_pos)
-    end
-  end
+    return [] if self.possible_jumps(visited).empty?
+    return [self.position, end_pos] if self.possible_jumps(visited).include?(end_pos)
 
-  def possible_jumps
-    jumps = []
-    board.each_index do |y|
-      row.each_index do |x|
-        jumps << [x,y] if valid_jump?[x, y]
+    self.possible_jumps(visited).each do |jump|
+      piece = Piece.new(color, king, jump, board.dup)
+      next if piece.possible_jumps(visited + [jump]).empty?
+      path = piece.multi_jumps_path(end_pos, visited)
+      if path.empty?
+        return []
+      elsif path.include?(end_pos)
+        return [self.position] + path
       end
+      return []
     end
-    return jumps
+  end
+
+  def possible_jumps(visited)
+    jumps = []
+    board.squares.each_with_index do |row, y|
+      row.each_index { |x| jumps << [x,y] if valid_jump?([x, y]) }
+    end
+    return jumps.reject { |jump| visited.include?(jump) }
   end
 end
