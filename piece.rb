@@ -38,11 +38,10 @@ class Piece
 
   def perform_moves!(moves)
     if moves.length == 1
-      unless perform_slide(moves[0])
-        unless perform_jump(moves[0])
-          raise InvalidMoveError.new("Illegal move!")
-        end
+      unless perform_slide(moves[0]) || perform_jump(moves[0])
+        raise InvalidMoveError.new("Illegal move!")
       end
+
 
     elsif moves.length > 1
       moves.each do |end_pos|
@@ -80,7 +79,6 @@ class Piece
     jumped_square = find_jumped_square(end_pos)
     return false unless board.enemy?(jumped_square, color)
     return false unless board.empty?(end_pos)
-    debugger
     squares_away?(2, end_pos)
   end
 
@@ -132,10 +130,10 @@ class Piece
   end
 
   def move_diffs
-    red = [[1,1], [-1, 1]]
     black =  [[1, -1], [-1, -1]]
-    return red + black if @king
-    return red if color == :red
+    red = [[1,1], [-1, 1]]
+    return black + red if @king
     return black if color == :black
+    return red if color == :red
   end
 end

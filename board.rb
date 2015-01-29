@@ -25,11 +25,10 @@ class Board
   end
 
   def set_starting_pieces
-    red_rows = [0, 1, 2]
     black_rows = [5, 6, 7]
-
-    fill_rows(red_rows, :red, true)
+    red_rows = [0, 1, 2]
     fill_rows(black_rows, :black, false)
+    fill_rows(red_rows, :red, true)
   end
 
   def fill_rows(rows, color, even)
@@ -52,6 +51,21 @@ class Board
 
   def empty?(pos)
     !occupied?(pos)
+  end
+
+  def lost?(color)
+    squares.each do |row|
+      row.each do |square|
+        if square.is_a? Piece
+          return false if square.color == color
+        end
+      end
+    end
+    return true
+  end
+
+  def over?
+    lost?(:black) || lost?(:red)
   end
 
   def remove_piece(pos)
