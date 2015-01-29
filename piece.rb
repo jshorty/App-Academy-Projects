@@ -5,12 +5,12 @@ class InvalidMoveError < StandardError
 end
 
 class Piece
-  attr_reader :color, :board
+  attr_reader :color, :board, :king
   attr_accessor :position
 
   def initialize(color, king, position, board)
     @color = color
-    @king = false
+    @king = king
     @position = position
     @board = board
   end
@@ -91,6 +91,7 @@ class Piece
 
   def valid_move_seq?(moves)
     begin
+      debugger
       board.dup[position].perform_moves!(moves)
     rescue InvalidMoveError
       return false
@@ -100,9 +101,17 @@ class Piece
 
   def maybe_promote
     case color
-    when :red then @king == true if position[1] == 7
-    when :black then @king == true if position[1] == 0
+    when :red then @king = true if position[1] == 7
+    when :black then @king = true if position[1] == 0
     end
+  end
+
+  def promote!
+    @king = true
+  end
+
+  def demote!
+    @king = false
   end
 
   def jumping?(end_pos)
@@ -135,5 +144,8 @@ class Piece
     return black + red if @king
     return black if color == :black
     return red if color == :red
+  end
+
+  def build_move_path(end_pos)
   end
 end

@@ -18,7 +18,7 @@ class Board
     copy = Board.new(false)
     self.squares.each do |row|
       row.each do |square|
-        copy[square.position] = square.dup if square.is_a? Piece
+        copy[square.position] = square.dup(copy) if square.is_a? Piece
       end
     end
     return copy
@@ -74,7 +74,12 @@ class Board
 
   def display
     colored = true
+    row_number = 8
+
+    puts "                              ".colorize(:background => :light_white)
     squares.each do |row|
+      print " #{row_number} ".colorize(:background => :light_white)
+      row_number -= 1
       row.each do |square|
         piece = "   " if square.nil?
         piece = " #{square.display} " if square
@@ -82,13 +87,19 @@ class Board
           print piece.colorize(:background => :red)
           colored = false
         else
-          print piece.colorize(:background => :light_white)
+          print piece.colorize(:background => :light_black)
           colored = true
         end
       end
+      print "   ".colorize(:background => :light_white)
       print "\n"
       colored = !colored
     end
+    puts "    A  B  C  D  E  F  G  H    ".colorize(:background => :light_white)
     return
+  end
+
+  def inspect
+    display
   end
 end
