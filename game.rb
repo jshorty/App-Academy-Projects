@@ -1,4 +1,6 @@
 require 'byebug'
+class InvalidMoveError < StandardError
+end
 
 class Game
   attr_reader :board
@@ -20,9 +22,8 @@ class Game
   end
 
   def welcome
-    puts
-    puts "WELCOME TO CHECKERS!"
-    puts "Double jumps are currently handled one step at a time."
+    print "\n\n"
+    puts "     WELCOME TO CHECKERS!"
     board.display
   end
 
@@ -30,23 +31,22 @@ class Game
     puts "#{color.to_s.capitalize} wins! Congratulations."
   end
 
+  def validate_piece(piece, player)
+    unless (piece.is_a? Piece) && piece.color == player.color
+      raise InvalidMoveError.new("Not your piece!")
+    end
+  end
+
   def turn(player)
     begin
       move = player.get_move
       piece = board[move[0]]
-      unless piece.is_a? Piece && piece.color == player.color
-        raise InvalidMoveError("Not your piece!")
-      end
+      validate_piece(piece, player)
       piece.perform_moves([move[1]])
-      # unless piece.possible_jumps.empty?
-      #     puts "That piece can keep going! :)"
-      #     move = play.get_move
-
     rescue InvalidMoveError => msg
       puts msg
       retry
     end
     board.display
-    debugger
   end
 end

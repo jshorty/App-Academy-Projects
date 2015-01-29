@@ -144,7 +144,7 @@ class Piece
     return red if color == :red
   end
 
-  def multi_jumps_path(end_pos, visited)
+  def multi_jumps_path(end_pos, visited) #Flawed, doesn't maximize # jumps
     visited << self.position
 
     return [] if self.possible_jumps(visited).empty?

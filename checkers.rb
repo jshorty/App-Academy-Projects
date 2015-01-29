@@ -5,7 +5,6 @@ require_relative 'game'
 require 'colorize'
 
 if __FILE__ == $PROGRAM_NAME
-  b = Board.new
-  b.set_starting_pieces
-  b.render
+  puts "Checkers by Jake Shorty 2015"
+  Game.new.play
 end
