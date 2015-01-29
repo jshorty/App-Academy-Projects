@@ -42,11 +42,19 @@ class Board
   end
 
   def occupied?(pos)
-    !self[[pos]].nil?
+    self[pos].is_a? Piece
+  end
+
+  def enemy?(pos, color)
+    occupied?(pos) && self[pos].color != color
   end
 
   def empty?(pos)
     !occupied?(pos)
+  end
+
+  def remove_piece(pos)
+    self[pos] = nil
   end
 
   def render
