@@ -21,12 +21,14 @@ class Piece
   end
 
   def perform_slide(end_pos)
+    return false if jumping?(end_pos) #Should jump instead!
     return false unless valid_move?(end_pos)
     move(end_pos)
     return true
   end
 
   def perform_jump(end_pos)
+    return false unless jumping?(end_pos) #Should slide instead!
     return false unless valid_move?(end_pos)
     jump_piece(end_pos)
     move(end_pos)
