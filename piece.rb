@@ -1,5 +1,9 @@
 #encoding: UTF-8
 require 'byebug'
+
+class InvalidMoveError < StandardError
+end
+
 class Piece
   attr_reader :color, :board
   attr_accessor :position
@@ -20,19 +24,64 @@ class Piece
     token
   end
 
+  def dup(board_copy)
+    Piece.new(color, king, position, board_copy)
+  end
+
+  def perform_moves(moves)
+    if valid_move_seq?(moves)
+      perform_moves!(moves)
+    else
+      raise InvalidMoveError.new("Illegal move!")
+    end
+  end
+
+  def perform_moves!(moves)
+    if moves.length == 1
+      unless perform_slide(moves[0])
+        unless perform_jump(moves[0])
+          raise InvalidMoveError.new("Illegal move!")
+        end
+      end
+
+    elsif moves.length > 1
+      moves.each do |end_pos|
+        unless perform_jump(end_pos)
+          raise InvalidMoveError.new("Illegal move!")
+        end
+      end
+
+    else
+      raise InvalidMoveError.new("No movement!")
+    end
+
+    return true
+  end
+
   def perform_slide(end_pos)
-    return false if jumping?(end_pos) #Should jump instead!
-    return false unless valid_move?(end_pos)
+    return false unless valid_slide?(end_pos)
     move(end_pos)
     return true
   end
 
   def perform_jump(end_pos)
-    return false unless jumping?(end_pos) #Should slide instead!
-    return false unless valid_move?(end_pos)
+    return false unless valid_jump?(end_pos)
     jump_piece(end_pos)
     move(end_pos)
     return true
+  end
+
+  def valid_slide?(end_pos)
+    return false unless board.empty?(end_pos)
+    squares_away?(1, end_pos)
+  end
+
+  def valid_jump?(end_pos)
+    jumped_square = find_jumped_square(end_pos)
+    return false unless board.enemy?(jumped_square, color)
+    return false unless board.empty?(end_pos)
+    debugger
+    squares_away?(2, end_pos)
   end
 
   def move(end_pos)
@@ -42,11 +91,11 @@ class Piece
     maybe_promote
   end
 
-  def valid_move?(end_pos)
-    return false unless in_range?(end_pos) && board.empty?(end_pos)
-    if jumping?(end_pos)
-      jumped_square = find_jumped_square(end_pos)
-      return false unless board.enemy?(jumped_square, color)
+  def valid_move_seq?(moves)
+    begin
+      board.dup[position].perform_moves!(moves)
+    rescue InvalidMoveError
+      return false
     end
     return true
   end
@@ -74,20 +123,19 @@ class Piece
 
   def jump_piece(end_pos)
     jumped_square = find_jumped_square(end_pos)
-    debugger
     board[jumped_square] = nil
   end
 
-  def in_range?(end_pos)
+  def squares_away?(n, end_pos)
     x, y = position
-    move_diffs.any? { |dx, dy| end_pos == [x + dx, y + dy] }
+    move_diffs.any? { |dx, dy| end_pos == [x + dx * n, y + dy * n] }
   end
 
   def move_diffs
-    red = [[1,1], [-1, 1], [2, 2], [-2, 2]]
-    black =  [[1, -1], [-1, -1], [2, -2], [-2, -2]]
+    red = [[1,1], [-1, 1]]
+    black =  [[1, -1], [-1, -1]]
     return red + black if @king
-    return black if color == :black
     return red if color == :red
+    return black if color == :black
   end
 end
