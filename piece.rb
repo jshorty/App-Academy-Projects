@@ -12,7 +12,7 @@ class Piece
   end
 
   def display
-    @king ? token == "✪" : token == "●"
+    @king ? token = "✪" : token = "●"
     case color
     when :black then token = token.colorize(:black)
     when :red then token = token.colorize(:light_red)
