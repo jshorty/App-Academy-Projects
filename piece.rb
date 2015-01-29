@@ -1,5 +1,4 @@
 #encoding: UTF-8
-require 'byebug'
 
 class InvalidMoveError < StandardError
 end
@@ -91,7 +90,6 @@ class Piece
 
   def valid_move_seq?(moves)
     begin
-      debugger
       board.dup[position].perform_moves!(moves)
     rescue InvalidMoveError
       return false
@@ -146,6 +144,29 @@ class Piece
     return red if color == :red
   end
 
-  def build_move_path(end_pos)
+  def multi_jumps_path?(end_pos)
+    return false if possible_jumps.empty?
+    return true if possible_jumps.include?(end_pos)
+    possible_jumps.any? do |jump|
+      Piece.new(color, king, jump, board.dup).multi_jumps_path?(end_pos)
+    end
+  end
+
+  def multi_jumps_path?(end_pos)
+    return false if possible_jumps.empty?
+    return true if possible_jumps.include?(end_pos)
+    possible_jumps.any? do |jump|
+      Piece.new(color, king, jump, board.dup).multi_jumps_path?(end_pos)
+    end
+  end
+
+  def possible_jumps
+    jumps = []
+    board.each_index do |y|
+      row.each_index do |x|
+        jumps << [x,y] if valid_jump?[x, y]
+      end
+    end
+    return jumps
   end
 end

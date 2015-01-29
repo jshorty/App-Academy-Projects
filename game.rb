@@ -22,6 +22,7 @@ class Game
   def welcome
     puts
     puts "WELCOME TO CHECKERS!"
+    puts "Double jumps are currently handled one step at a time."
     board.display
   end
 
@@ -31,13 +32,21 @@ class Game
 
   def turn(player)
     begin
-      move = @black.get_move
-      debugger
-      board[move[0]].perform_moves([move[1]]) #CAN ONLY HANDLE ONE MOVE!!!!!
+      move = player.get_move
+      piece = board[move[0]]
+      unless piece.is_a? Piece && piece.color == player.color
+        raise InvalidMoveError("Not your piece!")
+      end
+      piece.perform_moves([move[1]])
+      # unless piece.possible_jumps.empty?
+      #     puts "That piece can keep going! :)"
+      #     move = play.get_move
+
     rescue InvalidMoveError => msg
       puts msg
       retry
     end
     board.display
+    debugger
   end
 end
