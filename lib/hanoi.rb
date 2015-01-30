@@ -28,4 +28,28 @@ class Hanoi
     true
   end
 
+  def get_user_input
+    puts "What row you wanna move from?!"
+    row_from = gets.chomp
+    until row_from.length == 1 && row_from.to_i.between?(1,3)
+      puts "Invalid input! (1-3)"
+      row_from = gets.chomp
+    end
+
+    puts "What row you wanna move to?!"
+    row_to = gets.chomp
+    until row_to.length == 1 && row_to.to_i.between?(1,3) && row_to != row_from
+      puts "Invalid input! (1-3)"
+      row_to = gets.chomp
+    end
+
+    [row_to.to_i, row_from.to_i]
+  end
+
+  def play
+    until won?
+      puts @rows
+      move(@rows[get_user_input[0]-1], @rows[get_user_input[1]-1])
+    end
+  end
 end

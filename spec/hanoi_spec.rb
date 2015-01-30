@@ -65,4 +65,12 @@ describe Hanoi do
     end
   end
 
+  # describe "#get_user_input" do
+  #   let(:input) { hanoi.get_user_input }
+  #   it "returns an array of two unique numbers between 1-3" do
+  #     input =
+  #     expect(input.length).to eq(2)
+  #     expect(input.each).to all(be_between(1,3))
+  #   end
+  # end
 end
