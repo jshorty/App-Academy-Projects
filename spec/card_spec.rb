@@ -8,4 +8,8 @@ describe Card do
     expect(card.suit).to eq(:hearts)
     expect(card.value).to eq(13)
   end
+
+  it "is a valid card" do
+    expect(Card::VALUES[card.name]).to eq(card.value)
+  end
 end
