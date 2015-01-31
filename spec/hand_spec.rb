@@ -12,6 +12,7 @@ describe Hand do
   let(:ten_h) { Card.new(:ten, :hearts, 10) }
   let(:ten_d) { Card.new(:ten, :diamonds, 10) }
   let(:ten_c) { Card.new(:ten, :clubs, 10) }
+  let(:two_c) { Card.new(:two, :clubs, 2) }
 
   describe "#hold" do
     it "takes and holds cards" do
@@ -66,6 +67,23 @@ describe Hand do
     end
   end
 
+  describe "#find_matches" do
+    it "returns an array separating matching cards and other cards" do
+      hand.cards = [ten_s, ten_h, ten_d, ace_s, jack_s]
+      expect(hand.find_matches(3)).to eq([[ten_s, ten_h, ten_d], [ace_s, jack_s]])
+    end
+
+    it "handles four of a kind" do
+      hand.cards = [ten_s, ten_h, ten_d, ten_c, jack_s]
+      expect(hand.find_matches(4)).to eq([[ten_s, ten_h, ten_d, ten_c], [jack_s]])
+    end
+
+    it "handles pairs" do
+      hand.cards = [queen_s, ten_h, ten_d, two_c, jack_s]
+      expect(hand.find_matches(2)).to eq([[ten_h, ten_d], [queen_s, two_c, jack_s]])
+    end
+  end
+
   describe "#three_of_a_kind?" do
     it "detects three of a kind" do
       hand.cards = [ten_s, ten_h, ten_d, ace_s, jack_s]
@@ -90,6 +108,18 @@ describe Hand do
     end
   end
 
+  describe "two_pair?" do
+    it "detects two pairs" do
+      hand.cards = [jack_h, ten_h, ten_d, ace_s, jack_s]
+      expect(hand.two_pair?).to eq(true)
+    end
+
+    it "rejects hands that don't have two pairs" do
+      hand.cards = [queen_s, ten_h, king_s, ace_s, ten_s]
+      expect(hand.two_pair?).to eq(false)
+    end
+  end
+
   describe "#full_house?" do
     it "detects a full house" do
       hand.cards = [jack_h, ten_h, ten_d, ten_s, jack_s]
@@ -110,7 +140,32 @@ describe Hand do
   end
 
   describe "#optimize_hand" do
-    it "detects the best hand a player has"
-    it "returns "
+    it "returns a hash including hand rank" do
+      hand.cards = [jack_h, ten_h, ten_d, ten_s, queen_s]
+      optimized = hand.optimize_hand
+
+      expect(optimized).to be_a(Hash)
+      expect(optimized.values).to include(4)
+    end
+
+    it "doesn't return false positives" do
+      hand.cards = [two_c, jack_h, ten_d, ace_s, king_s]
+      optimized = hand.optimize_hand
+
+      expect(optimized.values).to include(1)
+    end
+
+    it "separates ranking cards and other cards" do
+      hand.cards = [jack_h, ten_h, ten_d, ten_s, queen_s]
+      optimized = hand.optimize_hand
+
+      expect(optimized.values).to include([ten_h, ten_d, ten_s])
+      expect(optimized.values).to include([jack_h, queen_s])
+    end
+  end
+
+  describe "compare(hand)" do
+    it "returns the winning hand" do
+    end
   end
 end
