@@ -164,8 +164,27 @@ describe Hand do
     end
   end
 
-  describe "compare(hand)" do
+  describe "#compare" do
+    let (:hand2) { Hand.new }
     it "returns the winning hand" do
+      hand.cards = [jack_h, ten_h, ten_d, ten_s, queen_s]
+      hand2.cards = [two_c, ten_c, king_s, ace_s, jack_h]
+
+      expect(hand.compare(hand2)).to eq(hand)
+    end
+
+    it "looks to the higher card in similar hands" do
+      hand.cards = [ace_s, ten_h, ten_d, two_c, queen_s]
+      hand2.cards = [jack_h, jack_s, ten_d, queen_s, king_s]
+
+      expect(hand.compare(hand2)).to eq(hand2)
+    end
+
+    it "looks to other high cards in a close tie" do
+      hand.cards = [ace_s, ten_h, ten_s, two_c, jack_s]
+      hand2.cards = [jack_h, ten_c, ten_d, queen_s, king_s]
+
+      expect(hand.compare(hand2)).to eq(hand)
     end
   end
 end

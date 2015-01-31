@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Hand
   attr_accessor :cards
 
@@ -62,8 +64,44 @@ class Hand
     some_cards.last.value
   end
 
+  def compare(other_hand)
+    hand1 = optimize_hand
+    hand2 = other_hand.optimize_hand
+    debugger
+    case hand1[:rank] <=> hand2[:rank]
+    when -1 then return other_hand
+    when 1 then return self
+    end
+
+    hand1[:ranked].sort_by!{ |card| card.value }.reverse!
+    hand2[:ranked].sort_by!{ |card| card.value }.reverse!
+
+    hand1[:ranked].count.times do |i|
+      case hand1[:ranked][i].value <=> hand2[:ranked][i].value
+      when -1 then return other_hand
+      when 1 then return self
+      when 0 then next
+      end
+    end
+
+    hand1[:other].sort_by!{ |card| card.value }.reverse!
+    hand2[:other].sort_by!{ |card| card.value }.reverse!
+
+    hand1[:other].count.times do |i|
+      case hand1[:other][i].value <=> hand2[:other][i].value
+      when -1 then return other_hand
+      when 1 then return self
+      when 0 then next
+      end
+    end
+
+    return nil
+  end
+
   def optimize_hand
+    #separates cards into the "scoring hand" and leftovers
     optimal_hand = {rank: 1, ranked: cards, other: []}
+
     if straight? && flush?
       optimal_hand[:rank] = 9
     elsif four_of_a_kind?
