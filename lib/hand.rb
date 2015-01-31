@@ -14,6 +14,10 @@ class Hand
     some_cards
   end
 
+  def count
+    cards.count
+  end
+
   def flush?
     suit = cards.first.suit
     cards.all? { |card| card.suit == suit}
