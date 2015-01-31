@@ -1,10 +1,36 @@
+require 'colorize'
+
 class Card
   attr_reader :name, :suit, :value
 
-  def initialize(name, suit, value)
+  def initialize(name, suit)
     @name = name
     @suit = suit
-    @value = value
+    @value = VALUES[name]
+  end
+
+  def inspect
+    print display
+  end
+
+  def display
+    case value
+    when 11 then char = "J"
+    when 12 then char = "Q"
+    when 13 then char = "K"
+    when 14 then char = "A"
+    else
+      char = value.to_s
+    end
+
+    case suit
+    when :spades then symbol = "[♠#{char}]".colorize(:black)
+    when :clubs then symbol = "[♣#{char}]".colorize(:black)
+    when :hearts then symbol = "[♥#{char}]".colorize(:red)
+    when :diamonds then symbol = "[♦#{char}]".colorize(:red)
+    end
+
+    symbol
   end
 
   SUITS = [:spades, :hearts, :diamonds, :clubs]

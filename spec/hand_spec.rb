@@ -3,16 +3,16 @@ require 'card'
 
 describe Hand do
   subject(:hand) { Hand.new }
-  let(:ace_s) { Card.new(:ace, :spades, 14) }
-  let(:king_s) { Card.new(:king, :spades, 13) }
-  let(:queen_s) { Card.new(:queen, :spades, 12) }
-  let(:jack_s) { Card.new(:jack, :spades, 11) }
-  let(:jack_h) { Card.new(:jack, :hearts, 11) }
-  let(:ten_s) { Card.new(:ten, :spades, 10) }
-  let(:ten_h) { Card.new(:ten, :hearts, 10) }
-  let(:ten_d) { Card.new(:ten, :diamonds, 10) }
-  let(:ten_c) { Card.new(:ten, :clubs, 10) }
-  let(:two_c) { Card.new(:two, :clubs, 2) }
+  let(:ace_s) { Card.new(:ace, :spades) }
+  let(:king_s) { Card.new(:king, :spades) }
+  let(:queen_s) { Card.new(:queen, :spades) }
+  let(:jack_s) { Card.new(:jack, :spades) }
+  let(:jack_h) { Card.new(:jack, :hearts) }
+  let(:ten_s) { Card.new(:ten, :spades) }
+  let(:ten_h) { Card.new(:ten, :hearts) }
+  let(:ten_d) { Card.new(:ten, :diamonds) }
+  let(:ten_c) { Card.new(:ten, :clubs) }
+  let(:two_c) { Card.new(:two, :clubs) }
 
   describe "#hold" do
     it "takes cards" do

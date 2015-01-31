@@ -1,7 +1,7 @@
 require 'card'
 
 describe Card do
-  subject(:card) { Card.new(:king, :hearts, 13) }
+  subject(:card) { Card.new(:king, :hearts) }
 
   it "has a name, suit, and poker value" do
     expect(card.name).to eq(:king)
@@ -12,4 +12,5 @@ describe Card do
   it "is a valid card" do
     expect(Card::VALUES[card.name]).to eq(card.value)
   end
+
 end
