@@ -9,10 +9,6 @@ class Card
     @value = VALUES[name]
   end
 
-  def inspect
-    print display
-  end
-
   def display
     case value
     when 11 then char = "J"

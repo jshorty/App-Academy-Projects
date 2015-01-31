@@ -5,6 +5,7 @@ class Deck
 
   def initialize
     @cards = generate_cards
+    shuffle
   end
 
   def draw(num)

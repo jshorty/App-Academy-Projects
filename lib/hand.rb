@@ -18,6 +18,11 @@ class Hand
     cards.count
   end
 
+  def display
+    cards.each { |card| print card.display }
+    return nil
+  end
+
   def flush?
     suit = cards.first.suit
     cards.all? { |card| card.suit == suit}
