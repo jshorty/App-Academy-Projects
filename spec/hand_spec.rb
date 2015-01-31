@@ -15,11 +15,20 @@ describe Hand do
   let(:two_c) { Card.new(:two, :clubs, 2) }
 
   describe "#hold" do
-    it "takes and holds cards" do
+    it "takes cards" do
       hand.hold([ace_s, king_s])
 
       expect(hand.cards).to eq([ace_s, king_s])
       expect(hand.cards).to be_an(Array)
+    end
+  end
+
+  describe '#discard' do
+    it "removes cards from hand" do
+      hand.hold([ace_s, king_s])
+      hand.discard([ace_s])
+
+      expect(hand.cards).to eq([king_s])
     end
   end
 

@@ -1,5 +1,3 @@
-require 'byebug'
-
 class Hand
   attr_accessor :cards
 
@@ -7,8 +5,13 @@ class Hand
     @cards = []
   end
 
-  def hold(cards)
-    @cards.concat(cards)
+  def hold(some_cards)
+    @cards.concat(some_cards)
+  end
+
+  def discard(some_cards)
+    @cards -= some_cards
+    some_cards
   end
 
   def flush?
@@ -67,7 +70,7 @@ class Hand
   def compare(other_hand)
     hand1 = optimize_hand
     hand2 = other_hand.optimize_hand
-    debugger
+
     case hand1[:rank] <=> hand2[:rank]
     when -1 then return other_hand
     when 1 then return self
