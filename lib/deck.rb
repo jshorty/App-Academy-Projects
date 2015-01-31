@@ -13,6 +13,10 @@ class Deck
     drawn_cards
   end
 
+  def count
+    return cards.count
+  end
+
   def return(cards)
     self.cards.concat(cards)
   end
@@ -22,14 +26,14 @@ class Deck
   end
 
   def generate_cards
-    array_o_cards = []
+    cards = []
 
     Card::SUITS.each do |suit|
       Card::VALUES.each do |name, value|
-        array_o_cards << Card.new(name, suit, value)
+        cards << Card.new(name, suit)
       end
     end
 
-    array_o_cards
+    cards
   end
 end

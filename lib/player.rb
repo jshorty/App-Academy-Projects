@@ -1,3 +1,5 @@
+require_relative 'hand'
+
 class Player
   attr_accessor :bankroll, :hand
 
