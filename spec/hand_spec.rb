@@ -22,13 +22,21 @@ describe Hand do
     end
   end
 
+  describe "#card_counts" do
+    it "returns a hash with number of each card value in hand" do
+      hand.cards = [ace_s, king_s, queen_s, jack_s, jack_h]
+      expect(hand.card_counts).to eq({:ace => 1, :king => 1,
+                                      :queen => 1, :jack => 2})
+    end
+  end
+
   describe "#flush?" do
     it "detects a flush" do
       hand.cards = [ace_s, king_s, queen_s, jack_s, ten_s]
       expect(hand.flush?).to eq(true)
     end
 
-    it "rejects cards that aren't a flush" do
+    it "rejects hands that aren't a flush" do
       hand.cards = [ace_s, king_s, queen_s, jack_s, ten_h]
       expect(hand.flush?).to eq(false)
     end
@@ -40,18 +48,69 @@ describe Hand do
       expect(hand.straight?).to eq(true)
     end
 
-    it "rejects cards that aran't a straight" do
+    it "rejects hands that aren't a straight" do
       hand.cards = [ace_s, king_s, queen_s, jack_s, jack_h]
       expect(hand.straight?).to eq(false)
     end
   end
 
+  describe "#four_of_a_kind?" do
+    it "detects four of a kind" do
+      hand.cards = [ten_s, ten_h, ten_d, ten_c, jack_s]
+      expect(hand.four_of_a_kind?).to eq(true)
+    end
 
+    it "rejects hands that aren't four of a kind" do
+      hand.cards = [queen_s, ten_h, ten_d, ten_c, jack_s]
+      expect(hand.four_of_a_kind?).to eq(false)
+    end
+  end
 
-  # describe "#flush?" do
-  #   it "hand can " do
-  #
-  #   end
-  # end
+  describe "#three_of_a_kind?" do
+    it "detects three of a kind" do
+      hand.cards = [ten_s, ten_h, ten_d, ace_s, jack_s]
+      expect(hand.three_of_a_kind?).to eq(true)
+    end
 
+    it "rejects hands that aren't three of a kind" do
+      hand.cards = [queen_s, ten_h, ten_d, ace_s, jack_s]
+      expect(hand.three_of_a_kind?).to eq(false)
+    end
+  end
+
+  describe "#pair?" do
+    it "detects pairs" do
+      hand.cards = [king_s, ten_h, ten_d, ace_s, jack_s]
+      expect(hand.pair?).to eq(true)
+    end
+
+    it "rejects hands that don't have a pair" do
+      hand.cards = [queen_s, ten_h, king_s, ace_s, jack_s]
+      expect(hand.pair?).to eq(false)
+    end
+  end
+
+  describe "#full_house?" do
+    it "detects a full house" do
+      hand.cards = [jack_h, ten_h, ten_d, ten_s, jack_s]
+      expect(hand.full_house?).to eq(true)
+    end
+
+    it "rejects hands that aren't a full house" do
+      hand.cards = [jack_h, ten_h, ten_d, ten_s, queen_s]
+      expect(hand.full_house?).to eq(false)
+    end
+  end
+
+  describe "#high_card" do
+    it "finds highest card value from a set of cards" do
+      hand.cards = [jack_h, ten_h, ten_d, ten_s, queen_s]
+      expect(hand.high_card(hand.cards)).to eq(12)
+    end
+  end
+
+  describe "#optimize_hand" do
+    it "detects the best hand a player has"
+    it "returns "
+  end
 end
