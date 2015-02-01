@@ -1,4 +1,3 @@
-require 'byebug'
 require_relative 'hand'
 
 class IllegalBetError < StandardError
@@ -39,7 +38,6 @@ class Player
       when "f" then return :fold
       when "c"
         raise IllegalBetError.new unless current_bet < bankroll
-        debugger
         @already_bet += current_bet
         @bankroll -= current_bet
         return :call
@@ -74,8 +72,9 @@ class Player
 
     discarded_cards = []
     card_indices.each do |i|
-      discarded_cards << hand.cards.delete_at(i)
+      discarded_cards << hand.cards[i]
     end
+    hand.cards -= discarded_cards
     discarded_cards
   end
 
