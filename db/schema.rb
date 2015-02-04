@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204163037) do
+ActiveRecord::Schema.define(version: 20150204164948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "shortened_urls", force: true do |t|
+    t.string   "long_url"
+    t.string   "short_url"
+    t.integer  "submitter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shortened_urls", ["short_url"], name: "short_url_index", unique: true, using: :btree
+  add_index "shortened_urls", ["submitter_id"], name: "submitter_id_index", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
