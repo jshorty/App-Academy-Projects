@@ -11,7 +11,7 @@ class ShortenedUrl < ActiveRecord::Base
   def self.random_code
     code = SecureRandom::urlsafe_base64(16)
 
-    while ShortenedUrl.where(short_url: code).any?
+    while ShortenedUrl.exists?(short_url: code)
       code = SecureRandom::urlsafe_base64(16)
     end
 
