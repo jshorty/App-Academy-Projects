@@ -1,7 +1,8 @@
 class ShortenedUrl < ActiveRecord::Base
-  validates :long_url, presence: true
+  validates :long_url, presence: true, length: {maximum: 400}
   validates :short_url, presence: true, uniqueness: true
   validates :submitter_id, presence: true
+  validate :cannot_submit_more_than_five_links_per_minute
 
   belongs_to :submitter,
     class_name: "User",
@@ -12,6 +13,13 @@ class ShortenedUrl < ActiveRecord::Base
     class_name: "Visit",
     foreign_key: :url_id,
     primary_key: :id
+
+  has_many :taggings,
+    class_name: "Tagging",
+    foreign_key: :shortened_url_id,
+    primary_key: :id
+
+  has_many :tags, through: :taggings, source: :tag_topic
 
   has_many :visitors, -> { distinct },
             through: :visits, source: :visitor
@@ -43,5 +51,11 @@ class ShortenedUrl < ActiveRecord::Base
 
   def num_recent_uniques(time)
     visits.where(created_at < time).select(:visitor_id).count
+  end
+
+  def cannot_submit_more_than_five_links_per_minute
+    if ShortenedUrl.where(submitter_id: 1)[4].created_at > 1.minute.ago
+      errors[:base] << "Can't add more than 5 links per minute!"
+    end
   end
 end
