@@ -8,6 +8,14 @@ class ShortenedUrl < ActiveRecord::Base
     foreign_key: :submitter_id,
     primary_key: :id
 
+  has_many :visits,
+    class_name: "Visit",
+    foreign_key: :url_id,
+    primary_key: :id
+
+  has_many :visitors, -> { distinct },
+            through: :visits, source: :visitor
+
   def self.random_code
     code = SecureRandom::urlsafe_base64(16)
 
@@ -23,5 +31,17 @@ class ShortenedUrl < ActiveRecord::Base
     ShortenedUrl.create! long_url: long_url,
                          submitter_id: user.id,
                          short_url: short_url
+  end
+
+  def num_clicks
+    visits.count
+  end
+
+  def num_uniques
+    visitors.count
+  end
+
+  def num_recent_uniques(time)
+    visits.where(created_at < time).select(:visitor_id).count
   end
 end
