@@ -12,4 +12,17 @@ class Poll < ActiveRecord::Base
     foreign_key: :poll_id,
     primary_key: :id
 
+  def self.all_question_counts
+    polls_with_question_counts = {}
+    polls = self.all
+      .select("polls.*, COUNT(questions.*) AS question_counts")
+      .joins(:questions)
+      .joins("JOIN questions.id ON answer_choices.question_id")
+      .joins("LEFT OUTER JOIN answer_choices.id ON responses.answer_choice_id")
+      .group("polls.id")
+    polls.each do |poll|
+      polls_with_question_counts[poll.title] = poll.question_counts
+    end
+    polls_with_question_counts
+  end
 end
