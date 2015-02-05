@@ -9,7 +9,8 @@ class Question < ActiveRecord::Base
   has_many :answer_choices,
     class_name: "AnswerChoice",
     foreign_key: :question_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
 
   has_many :responses, through: :answer_choices, source: :responses
 
@@ -28,4 +29,8 @@ class Question < ActiveRecord::Base
     choices_with_counts
   end
 
+  after_destroy :log_destroy_action
+  def log_destroy_action
+    puts "#{self.class} destroyed."
+  end
 end

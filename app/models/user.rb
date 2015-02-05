@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   has_many :authored_polls,
     class_name: 'Poll',
     foreign_key: :author_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
 
   has_many :responses,
       class_name: 'Response',
@@ -25,5 +26,10 @@ class User < ActiveRecord::Base
       .having("COUNT(user_responses.*) = COUNT(DISTINCT questions.*)")
 
     polls
+  end
+
+  after_destroy :log_destroy_action
+  def log_destroy_action
+    puts "#{self.class} destroyed."
   end
 end

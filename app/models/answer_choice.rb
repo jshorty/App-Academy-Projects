@@ -10,5 +10,11 @@ class AnswerChoice < ActiveRecord::Base
   has_many :responses,
     class_name: "Response",
     foreign_key: :answer_choice_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
+
+  after_destroy :log_destroy_action
+  def log_destroy_action
+    puts "#{self.class} destroyed."
+  end
 end

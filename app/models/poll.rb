@@ -10,7 +10,8 @@ class Poll < ActiveRecord::Base
   has_many :questions,
     class_name: 'Question',
     foreign_key: :poll_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
 
   def self.all_question_counts
     polls_with_question_counts = {}
@@ -24,5 +25,10 @@ class Poll < ActiveRecord::Base
       polls_with_question_counts[poll.title] = poll.question_counts
     end
     polls_with_question_counts
+  end
+
+  after_destroy :log_destroy_action
+  def log_destroy_action
+    puts "#{self.class} destroyed."
   end
 end
