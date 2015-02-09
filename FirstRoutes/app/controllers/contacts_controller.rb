@@ -1,8 +1,10 @@
 class ContactsController < ApplicationController
 
   def index
-    contacts = Contact.all
-    render json: contacts
+    user = User.find(params[:user_id])
+    contacts = Contact.where(user_id: params[:user_id])
+    shared_contacts = user.shared_contacts
+    render json: contacts + shared_contacts
   end
 
   def show
@@ -34,9 +36,6 @@ class ContactsController < ApplicationController
     contact.destroy!
     render json: contact
   end
-
-
-
 
   private
 
