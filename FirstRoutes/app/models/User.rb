@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   has_many :contact_shares,
     class_name: "ContactShare",
     primary_key: :id,
-    foreign_key: :user_id
+    foreign_key: :user_id,
+    :dependent => :destroy
 
   has_many :shared_contacts, through: :contact_shares, source: :contact
 end
