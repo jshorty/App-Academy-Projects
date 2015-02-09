@@ -13,5 +13,18 @@ class User < ActiveRecord::Base
     foreign_key: :user_id,
     :dependent => :destroy
 
-  has_many :shared_contacts, through: :contact_shares, source: :contact
+  has_many :shared_contacts,
+    through: :contact_shares,
+    source: :contact
+
+  has_many :comments,
+    as: :commentable,
+    class_name: "Comment",
+    foreign_key: :commentable_id,
+    primary_key: :id
+
+  has_many :authored_comments,
+    class_name: "Comment",
+    primary_key: :id,
+    foreign_key: :author_id
 end

@@ -1,7 +1,6 @@
 require 'addressable/uri'
 require 'rest-client'
 
-
 def create_user
   url = Addressable::URI.new(
     scheme: 'http',

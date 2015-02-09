@@ -12,5 +12,13 @@ class Contact < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :contact_id
 
-  has_many :shared_users, through: :contact_shares, source: :user
+  has_many :shared_users,
+    through: :contact_shares,
+    source: :user
+
+  has_many :comments,
+    as: :commentable,
+    class_name: "Comment",
+    primary_key: :id,
+    foreign_key: :commentable_id
 end
