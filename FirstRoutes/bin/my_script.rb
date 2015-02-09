@@ -18,9 +18,9 @@ def create_contact
     scheme: 'http',
     host: 'localhost',
     port: 3000,
-    path: '/contacts/2.json',
+    path: '/contacts/1/fav.json',
 
   ).to_s
 
-  puts RestClient.delete(url, {contact: {name: "Benjamin", email: "ben@ben.ben", user_id: 3}})
+  puts RestClient.put(url, {:user_id => 1})
 end

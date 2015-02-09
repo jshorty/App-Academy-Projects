@@ -21,4 +21,13 @@ class Contact < ActiveRecord::Base
     class_name: "Comment",
     primary_key: :id,
     foreign_key: :commentable_id
+
+  has_many :groupings,
+    class_name: "GroupedContact",
+    primary_key: :id,
+    foreign_key: :contact_id
+
+  has_many :groups,
+    through: :groupings,
+    source: :group
 end

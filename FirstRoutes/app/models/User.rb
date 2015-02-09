@@ -27,4 +27,9 @@ class User < ActiveRecord::Base
     class_name: "Comment",
     primary_key: :id,
     foreign_key: :author_id
+
+  has_many :groups,
+    class_name: "Group",
+    primary_key: :id,
+    foreign_key: :user_id
 end

@@ -37,6 +37,24 @@ class ContactsController < ApplicationController
     render json: contact
   end
 
+  def favorite
+    contact = Contact.find(params[:contact_id])
+    if contact.user_id == params[:user_id].to_i
+      contact.favorite ? new_fav = false : new_fav = true
+      contact.update({favorite: new_fav})
+
+      render json: contact
+    elsif contact.contact_shares.exists?(user_id: params[:user_id])
+      fav = contact.contact_shares.where(user_id: params[:user_id]).first
+      fav.favorite ? new_fav = false : new_fav = true
+      fav.update({favorite: new_fav})
+      render json: fav
+    else
+      raise "You can't favorite a contact that wasn't shared with you"
+    end
+  end
+
+
   private
 
   def contact_params
