@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209185540) do
+ActiveRecord::Schema.define(version: 20150209190856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contact_shares", force: true do |t|
+    t.integer  "contact_id", null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contact_shares", ["contact_id", "user_id"], name: "index_contact_shares_on_contact_id_and_user_id", unique: true, using: :btree
+  add_index "contact_shares", ["contact_id"], name: "index_contact_shares_on_contact_id", using: :btree
+  add_index "contact_shares", ["user_id"], name: "index_contact_shares_on_user_id", using: :btree
 
   create_table "contacts", force: true do |t|
     t.string  "name",    null: false
@@ -23,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150209185540) do
   end
 
   add_index "contacts", ["email", "user_id"], name: "index_contacts_on_email_and_user_id", unique: true, using: :btree
+  add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",   null: false
