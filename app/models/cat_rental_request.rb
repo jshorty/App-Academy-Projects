@@ -1,7 +1,7 @@
 class CatRentalRequest < ActiveRecord::Base
   validates :cat_id, :start_date, :end_date, presence: true
   after_initialize :set_status_pending
-  validates_inclusion_of :status, in: ["PENDING", "APPROVED", "DENIED"]
+  validates :status, inclusion: {in: ["PENDING", "APPROVED", "DENIED"]}
   validate :cannot_overlap_with_approved_requests
 
   belongs_to(
@@ -25,14 +25,14 @@ class CatRentalRequest < ActiveRecord::Base
 
 
   def set_status_pending
-    status ||= "PENDING"
+    self.status ||= "PENDING"
   end
 
   private
 
   def cannot_overlap_with_approved_requests
     if self.overlapping_approved_requests.any?
-      [errors: base] << "There is an overlapping approved request."
+      errors[:base] << "There is an overlapping approved request."
     end
   end
 end

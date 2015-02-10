@@ -6,7 +6,7 @@
       url = cat_url(cat)
       verb = "patch"
     else
-      url = new_cat_url
+      url = cats_url
       verb = "post"
     end
 %>
@@ -17,7 +17,7 @@
   <label for="cat_name">Name</label>
   <input type="text" id="cat_name" name="cat[name]" value="<%= cat.name %>">
   <br />
-  
+
   <input type="radio" name="cat[sex]" id="cat_sex_male" value="M" <%= "checked" if cat.sex == 'M' %>>
   <label for="cat_sex_male">Male</label>
   <br />
