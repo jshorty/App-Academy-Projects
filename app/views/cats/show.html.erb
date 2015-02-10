@@ -24,3 +24,17 @@
 </table>
 
 <%= link_to "Edit this cat", edit_cat_url %>
+
+<h2>Requests for <%= @cat.name %>:</h2>
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+<% @cat.requests.order(:start_date).each do |request| %>
+  <tr>
+    <td><%= request.start_date %></td>
+    <td><%= request.end_date %></td>
+  </tr>
+  <% end %>
+</table>

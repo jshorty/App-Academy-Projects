@@ -5,6 +5,13 @@ class Cat < ActiveRecord::Base
   validates_inclusion_of :sex, in: ["M", "F"]
   validates_inclusion_of :color, in: COLORS
 
+  has_many(
+    :requests,
+    class_name: 'CatRentalRequest',
+    foreign_key: :cat_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
   def age
     (Date.today - birth_date).to_i / 365
   end
