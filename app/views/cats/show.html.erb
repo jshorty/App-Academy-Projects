@@ -23,18 +23,31 @@
   </tr>
 </table>
 
-<%= link_to "Edit this cat", edit_cat_url %>
+<a href="<%=edit_cat_url %>">Edit this cat</a>
 
 <h2>Requests for <%= @cat.name %>:</h2>
 <table>
   <tr>
     <th>Start Date</th>
     <th>End Date</th>
+    <th>Request Status</th>
   </tr>
 <% @cat.requests.order(:start_date).each do |request| %>
   <tr>
     <td><%= request.start_date %></td>
     <td><%= request.end_date %></td>
+    <td><%= request.status %></td>
+
+    <% if request.status == "PENDING" %>
+    <form action="/approve/<%= request.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <td><button type="submit">APPROVE</button></td>
+      </form>
+      <form action="/deny/<%= request.id %>" method="post">
+        <input type="hidden" name="_method" value="patch">
+      <td><button type="submit">DENY</button></td>
+    </form>
+    <% end %>
   </tr>
-  <% end %>
+<% end %>
 </table>
