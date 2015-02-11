@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+  before_action :ensure_cat_ownership, only: [:edit, :update]
+
   def index
     @cats = Cat.all
     render :index
@@ -43,5 +45,13 @@ class CatsController < ApplicationController
 
   def cat_params
     params.require(:cat).permit(:name, :sex, :birth_date, :color, :description)
+  end
+
+  def ensure_cat_ownership
+    unless current_user == Cat.find(params[:id]).owner
+      flash[:errors] = ["You can only edit your own cats!"]
+      redirect_to cat_url(params[:id])
+    end
+
   end
 end
