@@ -40,11 +40,9 @@
 
     <% if request.status == "PENDING" %>
     <form action="/approve/<%= request.id %>" method="post">
-      <input type="hidden" name="_method" value="patch">
       <td><button type="submit">APPROVE</button></td>
       </form>
       <form action="/deny/<%= request.id %>" method="post">
-        <input type="hidden" name="_method" value="patch">
       <td><button type="submit">DENY</button></td>
     </form>
     <% end %>
