@@ -15,6 +15,10 @@
 
 <% if current_user %>
   <p>Welcome, <%= current_user.user_name %>!</p>
+  <form action="/session/end" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button>Log Out</button>
+  </form>
 <% else %>
   <a href="<%= new_session_url %>">Log In</a>
 <% end %>

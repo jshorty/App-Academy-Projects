@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     as: 'deny_request_url'
 
   resources :users, only: [:new, :create]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create]
+  delete '/session/end', to: 'sessions#destroy', as: 'session_end_url'
 end
