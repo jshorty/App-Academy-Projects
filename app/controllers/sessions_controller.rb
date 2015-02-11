@@ -15,8 +15,7 @@ class SessionsController < ApplicationController
       @user = User.new(user_name: params[:user][:user_name])
       render :new
     else
-      @user.reset_session_token!
-      session[:token] = @user.session_token
+      login(@user)
       redirect_to cats_url
     end
   end

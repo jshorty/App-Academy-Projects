@@ -7,5 +7,10 @@ class ApplicationController < ActionController::Base
     @current ||= User.find_by(session_token: session[:token])
   end
 
-  helper_method :current_user
+  def login(user)
+    user.reset_session_token!
+    session[:token] = user.session_token
+  end
+
+  helper_method :current_user, :login
 end
