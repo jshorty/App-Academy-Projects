@@ -5,4 +5,7 @@ Rails.application.routes.draw do
     as: 'approve_request_url'
   post '/deny/:id', :to => 'cat_rental_requests#deny',
     as: 'deny_request_url'
+
+  resources :users, only: [:new, :create]
+  resources :sessions, only: [:new, :create, :destroy]
 end

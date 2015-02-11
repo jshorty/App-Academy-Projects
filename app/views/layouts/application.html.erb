@@ -2,10 +2,16 @@
 <html>
 <head>
   <title>Cats99</title>
-  
+
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <%= error %><br>
+  <% end %>
+<% end %>
 
 <%= yield %>
 

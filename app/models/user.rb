@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     user.is_password?(password) ? user : nil
   end
 
+  def reset_session_token
+    reset_session_token!
+  end
+
 
   private
 
