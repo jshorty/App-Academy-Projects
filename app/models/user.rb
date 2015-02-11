@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :user_id
 
+  has_many :cat_rental_requests,
+    class_name: 'CatRentalRequest',
+    primary_key: :id,
+    foreign_key: :user_id
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
     @password = password

@@ -6,6 +6,9 @@
 <% end %>
 </ul>
 
-<%= link_to "Create a new cat", new_cat_url %>
-<br>
-<%= link_to "Submit rental request", new_cat_rental_request_url %>
+<% if current_user %>
+  <a href="<%= new_cat_url %>">Register your cat for rental</a>
+  <br>
+  <br>
+  <a href="<%= new_cat_rental_request_url %>">Submit a rental request</a>
+<% end %>

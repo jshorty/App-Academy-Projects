@@ -1,5 +1,5 @@
 class CatRentalRequest < ActiveRecord::Base
-  validates :cat_id, :start_date, :end_date, presence: true
+  validates :cat_id, :start_date, :end_date, :user_id, presence: true
   after_initialize :set_status_pending
   validates :status, inclusion: {in: ["PENDING", "APPROVED", "DENIED"]}
   validate :cannot_overlap_with_approved_requests
@@ -9,6 +9,13 @@ class CatRentalRequest < ActiveRecord::Base
     class_name: 'Cat',
     foreign_key: :cat_id,
     primary_key: :id
+  )
+
+  belongs_to(
+    :user,
+    class_name: 'User',
+    primary_key: :id,
+    foreign_key: :user_id
   )
 
   def overlapping_requests
