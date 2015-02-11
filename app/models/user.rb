@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  validates :user_name, :password_digest, :session_token, presence: true
-  validates :user_name, :session_token, uniqueness: true
+  validates :user_name, :password_digest, presence: true
+  validates :user_name, uniqueness: true
   validates :password, length: {minimum: 6}, allow_nil: true
 
-  after_initialize :ensure_session_token
+  #after_initialize :ensure_session_token
 
   has_many :cats,
     class_name: "Cat",
@@ -39,16 +39,16 @@ class User < ActiveRecord::Base
     user.is_password?(password) ? user : nil
   end
 
-  def reset_session_token!
-    self.session_token = SecureRandom::urlsafe_base64(16)
-    self.update(session_token: self.session_token)
-    self.session_token
-  end
-
-  private
-
-  def ensure_session_token
-    self.session_token ||= reset_session_token!
-  end
+  # def reset_session_token!
+  #   self.session_token = SecureRandom::urlsafe_base64(16)
+  #   self.update(session_token: self.session_token)
+  #   self.session_token
+  # end
+  #
+  # private
+  #
+  # def ensure_session_token
+  #   self.session_token ||= reset_session_token!
+  # end
 
 end

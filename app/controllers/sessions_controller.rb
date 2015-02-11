@@ -11,19 +11,20 @@ class SessionsController < ApplicationController
       params[:user][:user_name],
       params[:user][:password]
     )
+    @session_data = [params[:user][:env], params[:user][:ip]]
 
     if @user.nil?
       flash.now[:errors] = ["Invalid username or password!"]
       @user = User.new(user_name: params[:user][:user_name])
       render :new
     else
-      login(@user)
+      login(@user, @session_data)
       redirect_to cats_url
     end
   end
 
   def destroy
-    current_user.reset_session_token!
+    Session.find_by(token: session[:token]).destroy
     session[:token] = nil
     redirect_to cats_url
   end
