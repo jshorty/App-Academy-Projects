@@ -1,4 +1,7 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :ensure_cat_ownership, only: [:approve, :deny]
+
+
   def new
     @request = CatRentalRequest.new
     render :new
@@ -29,5 +32,13 @@ class CatRentalRequestsController < ApplicationController
 
   def request_params
     params.require(:cat_rental_request).permit(:cat_id, :start_date, :end_date)
+  end
+
+  def ensure_cat_ownership
+    cat = CatRentalRequest.find(params[:id]).cat
+    unless current_user == cat.owner
+      flash[:errors] = ["You can't handle requests for someone else's cat!"]
+      redirect_to cat_url(cat.id)
+    end
   end
 end

@@ -52,6 +52,5 @@ class CatsController < ApplicationController
       flash[:errors] = ["You can only edit your own cats!"]
       redirect_to cat_url(params[:id])
     end
-
   end
 end

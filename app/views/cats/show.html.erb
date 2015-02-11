@@ -40,9 +40,15 @@
 
     <% if request.status == "PENDING" %>
     <form action="/approve/<%= request.id %>" method="post">
+      <input type="hidden"
+             name="authenticity_token"
+             value="<%= form_authenticity_token %>">
       <td><button type="submit">APPROVE</button></td>
       </form>
       <form action="/deny/<%= request.id %>" method="post">
+        <input type="hidden"
+               name="authenticity_token"
+               value="<%= form_authenticity_token %>">
       <td><button type="submit">DENY</button></td>
     </form>
     <% end %>
