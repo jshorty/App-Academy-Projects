@@ -15,6 +15,11 @@ class User < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :user_id
 
+  has_many :sessions,
+    class_name: "Session",
+    primary_key: :id,
+    foreign_key: :user_id
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
     @password = password
