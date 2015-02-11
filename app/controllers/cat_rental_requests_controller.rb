@@ -1,4 +1,5 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :validate_login, only: :new
   before_action :ensure_cat_ownership, only: [:approve, :deny]
 
 
@@ -40,6 +41,13 @@ class CatRentalRequestsController < ApplicationController
     unless current_user == cat.owner
       flash[:errors] = ["You can't handle requests for someone else's cat!"]
       redirect_to cat_url(cat.id)
+    end
+  end
+
+  def validate_login
+    unless current_user
+      flash[:errors] = ["Log in or sign up to rent a cat today!"]
+      redirect_to new_session_url
     end
   end
 end
