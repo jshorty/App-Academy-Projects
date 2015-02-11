@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :cats,
+    class_name: "Cat",
+    primary_key: :id,
+    foreign_key: :user_id
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
     @password = password

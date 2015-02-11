@@ -16,6 +16,10 @@
 <% if current_user %>
   <p>Welcome, <%= current_user.user_name %>!</p>
   <form action="/session/end" method="post">
+    <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
     <input type="hidden" name="_method" value="delete">
     <button>Log Out</button>
   </form>
