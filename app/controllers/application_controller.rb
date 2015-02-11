@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user, :login
+
+  def must_be_logged_out
+    unless current_user.nil?
+      flash[:errors] = ["You're already logged in!"]
+      redirect_to cats_url
+    end
+  end
 end

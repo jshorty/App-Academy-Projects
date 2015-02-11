@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :must_be_logged_out
+
   def new
     @user = User.new
     render :new
@@ -10,6 +12,7 @@ class UsersController < ApplicationController
       login(@user)
       redirect_to cats_url
     else
+      flash.now[:errors] = ["Invalid username or password"]
       render :new
     end
   end
