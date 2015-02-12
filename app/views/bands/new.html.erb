@@ -1,0 +1,20 @@
+<h1>Add a band to the archive</h1>
+
+<form action="<%= bands_url %>" method="POST">
+
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <label for="band_name">Band Name:</label>
+  <br>
+  <input type="text"
+         id="band_name"
+         name="band[name]"
+         value="<%= @band.name %>"
+
+  <br>
+  <br>
+
+  <button>Submit</button>
+</form>

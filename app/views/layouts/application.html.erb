@@ -6,15 +6,9 @@
 </head>
 <body>
 
-
-<% unless flash[:errors].nil? %>
-  <% flash[:errors].each do |error| %>
-    <p><%= error %></p>
-  <% end %>
-<% end %>
-
-
+<h3>The Music Inventory</h3>
 <% if logged_in? %>
+  <p>Logged in as <%= current_user %></p>
   <form action="<%= session_url %>" method="POST">
     <input type="hidden"
            name="authenticity_token"
@@ -22,8 +16,14 @@
     <input type="hidden" name="_method" value="DELETE">
     <button>Log Out</button>
   </form>
-<!--<#% else %>
-  <a href="<#% new_session_url %>"><button>Log In</button></a>-->
+<% else %>
+  <a href="<% new_session_url %>"><button>Log In</button></a>
+<% end %>
+
+<% unless flash[:errors].nil? %>
+  <% flash[:errors].each do |error| %>
+    <p><%= error %></p>
+  <% end %>
 <% end %>
 
 <%= yield %>

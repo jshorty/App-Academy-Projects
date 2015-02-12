@@ -1,6 +1,6 @@
 class Album < ActiveRecord::Base
-  validate :name, :band_id, :performance presence: true
-  validate :performance, inclusion: { in: {"live", "studio"}
+  validate :name, :band_id, :performance, presence: true
+  validate :performance, inclusion: { in: ["live", "studio"] }
   validate :name, uniqueness: { scope: :band_id,
     message: "bands must have uniquely named albums" }
 
