@@ -9,8 +9,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in!(@user)
-      redirect_to user_url(@user.id)
+      UserMailer.activation_email(@user).deliver
+      redirect_to new_session_url
+      flash[:errors] = ["check your email for an activation link!"]
     else
       flash.now[:errors] = ["invalid user information"]
       render :new
@@ -20,5 +21,15 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     render :show
+  end
+
+  def activate
+    @user = User.find_by(activation_token: params[:activation_token])
+    if @user.nil?
+      redirect_to new_session_url
+    else
+      @user.activate!
+      log_in!(@user)
+    end
   end
 end

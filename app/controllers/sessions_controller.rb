@@ -16,7 +16,6 @@ class SessionsController < ApplicationController
       render :new
     else
       log_in!(@user)
-      redirect_to new_url(@user.id)
     end
   end
 

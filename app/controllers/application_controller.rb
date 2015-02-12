@@ -4,8 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def log_in!(user)
-    user.reset_session_token!
-    session[:token] = user.session_token
+    if user.activated?
+      user.reset_session_token!
+      session[:token] = user.session_token
+      redirect_to user_url(user.id)
+    else
+      flash[:errors] = ["This account hasn't been activated. Check your email!"]
+      redirect_to user_url(user.id)
+    end
   end
 
   def log_out!(user)

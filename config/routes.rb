@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :notes, only: [:create, :destroy]
   end
 
+  get "/users/activate?activation_token=:token", to: 'users#activate'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
