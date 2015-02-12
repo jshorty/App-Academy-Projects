@@ -21,12 +21,7 @@
   <a href="<%= new_user_url %>"><button>Sign Up</button></a>
 <% end %>
 
-<% unless flash[:errors].nil? %>
-  <% flash[:errors].each do |error| %>
-    <p><%= error %></p>
-  <% end %>
-<% end %>
-
+<%= error_messages %>
 <%= yield %>
 
 </body>

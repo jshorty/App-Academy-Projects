@@ -1,29 +1,3 @@
 <h1> Log in! </h1>
 
-<form action=<%= session_url %> method="post">
-
-  <input type="hidden"
-         name="authenticity_token"
-         value="<%= form_authenticity_token %>"
-
-  <label for="email">Email</label>
-  <br>
-  <input type="text"
-         id="email"
-         name="user[email]"
-         value="<%= @user.email %>">
-
-  <br>
-  <br>
-
-  <label for="password">Password</label>
-  <br>
-  <input type="password"
-         id="password"
-         name="user[password]">
-
-  <br>
-  <br>
-
-  <button>Submit</button>
-</form>
+<%= render "users/form" %>
