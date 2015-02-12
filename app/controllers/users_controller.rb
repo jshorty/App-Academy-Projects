@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :ensure_logged_in, only: :show
 
   def new
     @user = User.new
@@ -6,19 +7,18 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(email: params[:email],
-                     password: params[:password])
+    @user = User.new(user_params)
     if @user.save
-      #redirect_to
+      log_in!(@user)
+      redirect_to user_url(@user.id)
     else
       flash.now[:errors] = ["invalid user information"]
       render :new
     end
-
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:email, :password)
+  def show
+    @user = current_user
+    render :show
+  end
 end
