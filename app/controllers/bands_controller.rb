@@ -10,7 +10,7 @@ class BandsController < ApplicationController
     if @band.save
       redirect_to band_url(@band.id)
     else
-      flash.now[:errors] = ["error entering the band to database"]
+      flash.now[:errors] = @band.errors.full_messages
       render :new
     end
   end
@@ -22,10 +22,15 @@ class BandsController < ApplicationController
 
   def edit
     @band = Band.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @band = Band.find(params[:id])
     if @band.update(band_params)
       redirect_to band_url(@band.id)
     else
-      flash.now[:errors] = ["error editing the band's name"]
+      flash.now[:errors] = @band.errors.full_messages
       render :edit
     end
   end
