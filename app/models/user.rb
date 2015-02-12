@@ -3,6 +3,12 @@ class User < ActiveRecord::Base
   validates :email, :session_token, uniqueness: true
   after_initialize :ensure_session_token
 
+  has_many :notes,
+    class_name: "Note",
+    primary_key: :id,
+    foreign_key: :user_id,
+    dependent: :destroy
+
   def password
     @password
   end
