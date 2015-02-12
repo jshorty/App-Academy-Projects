@@ -3,7 +3,7 @@
 <h3><%= @track.album.band.name %> - <%= @track.album.name %></h3>
 
 <h3>Lyrics:</h3>
-<p><%= @track.lyrics %></p>
+<p><%= ugly_lyrics(@track.lyrics) %></p>
 
 <a href="<%= album_url(@track.album_id) %>"><< All Tracks on <%= @track.album.name %> by
   <%= @track.album.band.name %></a>
@@ -12,6 +12,11 @@
 <br>
 <br>
 <br>
+
+
+<%= render "notes/note" %>
+
+<%= render "notes/form" %>
 
 <a href="<%= edit_track_url(@track.id) %>">Edit Track</a>
 

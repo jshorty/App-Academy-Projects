@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     resources :tracks, only: :new
   end
 
-  resources :tracks, except: [:new, :index]
+  resources :tracks, except: [:new, :index] do
+    resources :notes, only: [:create, :destroy]
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
