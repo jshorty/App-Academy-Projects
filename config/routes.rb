@@ -7,11 +7,11 @@ Rails.application.routes.draw do
     resources :albums, only: :new
   end
 
-  resources :albums, except: :new do
+  resources :albums, except: [:new, :index] do
     resources :tracks, only: :new
   end
 
-  resources :tracks, except: :new
+  resources :tracks, except: [:new, :index]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

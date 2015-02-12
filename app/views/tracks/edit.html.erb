@@ -61,3 +61,9 @@
 
   <button>Submit</button>
 </form>
+
+<br>
+<br>
+
+<a href="<%= album_url(@track.album_id) %>"><< All Tracks on <%= @track.album.name %> by
+  <%= @track.album.band.name %></a>

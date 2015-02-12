@@ -1,4 +1,5 @@
 class BandsController < ApplicationController
+  before_action :ensure_logged_in
 
   def new
     @band = Band.new

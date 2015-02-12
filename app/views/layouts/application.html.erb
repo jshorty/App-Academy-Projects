@@ -8,7 +8,7 @@
 
 <h3>The Music Inventory</h3>
 <% if logged_in? %>
-  <p>Logged in as <%= current_user %></p>
+  <p>Logged in as <%= current_user.email %></p>
   <form action="<%= session_url %>" method="POST">
     <input type="hidden"
            name="authenticity_token"
@@ -17,7 +17,8 @@
     <button>Log Out</button>
   </form>
 <% else %>
-  <a href="<% new_session_url %>"><button>Log In</button></a>
+  <a href="<%= new_session_url %>"><button>Log In</button></a>
+  <a href="<%= new_user_url %>"><button>Sign Up</button></a>
 <% end %>
 
 <% unless flash[:errors].nil? %>
