@@ -1,0 +1,17 @@
+<% url = user.persisted? ? users_url : new_user_url %>
+
+<form action=<%= new_or_edit_url %> method="post">
+
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>"
+
+  <% if user.persisted? %>
+    <input type="hidden" method="patch">
+  <% end %>
+
+  <label for="email">Email</label>
+  <input type="text"
+         id="email"
+         name="user[email]"
+         value="<%= @user.email %>"
