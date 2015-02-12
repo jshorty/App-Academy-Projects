@@ -23,7 +23,7 @@
     <option>BAND NAME</option>
     <% @bands.each do |band| %>
       <option value="<%= band.id %>"
-              <%= "selected" if band == album.band %>>
+              <%= "selected" if band == @band %>>
               <%= band.name %></option>
     <% end %>
   </select>
@@ -50,3 +50,8 @@
 
   <button>Submit</button>
 </form>
+
+<br>
+<br>
+
+<a href="<%= band_url(@band.id) %>"><< All Albums by <%= @band.name %></a>

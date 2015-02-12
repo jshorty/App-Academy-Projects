@@ -16,12 +16,19 @@
 <br>
 <br>
 
-<a href="<%= bands_url %>"><< All Albums by <%= @album.band.name %></a>
+<a href="<%= band_url(@album.band_id) %>"><< All Albums by <%= @album.band.name %></a>
+
+<br>
+<br>
+<br>
+<br>
+
+<a href="<%= edit_album_url(@album.id) %>">Edit Album</a>
 
 <br>
 <br>
 
-<form action="<%= band_url(@band.id) %>" method="post">
+<form action="<%= album_url(@album.id) %>" method="post">
   <input type="hidden"
          name="authenticity_token"
          value="<%= form_authenticity_token %>">

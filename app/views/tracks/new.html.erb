@@ -1,0 +1,62 @@
+<h1> Add a track to the archive </h1>
+
+<form action="<%= tracks_url %>" method="POST">
+
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <label for="track_name">Title:</label>
+  <br>
+  <input type="text"
+         id="track_name"
+         name="track[name]"
+         value="New Track">
+
+  <br>
+  <br>
+
+  <label for="track_album">Album:</label>
+  <br>
+  <select id="track_album"
+          name="track[album_id]">
+    <option>ALBUM TITLE</option>
+    <% @albums.each do |album| %>
+      <option value="<%= album.id %>"
+              <%= "selected" if album == @album %>>
+              <%= album.name %> - <%= album.band.name %></option>
+    <% end %>
+  </select>
+
+  <br>
+  <br>
+
+  <input type="radio"
+         name="track[bonus]"
+         id="track_type"
+         <%= "checked" if @track.bonus == false %>>
+  <label for="recording_type">Regular Track</label>
+
+  <br>
+
+  <input type="radio"
+         name="track[bonus]"
+         id="track_type"
+         value="true">
+         <%= "checked" if @track.bonus == true %>
+  <label for="recording_type">Bonus Track</label>
+
+  <br>
+  <br>
+
+  <label for="track_lyrics">Lyrics:</label>
+  <br>
+  <textarea id="track_lyrics" name="track[lyrics]">
+    <%= @track.lyrics %>
+  </textarea>
+
+  <br>
+  <br>
+
+  <button>Submit</button>
+</form>
