@@ -1,13 +1,19 @@
 class Post < ActiveRecord::Base
-  validates :title, :author_id, :sub_id, presence: true
+  validates :title, :sub_ids, :author_id, presence: true
+  validates :sub_ids, length: {minimum: 1}
 
-  belongs_to :sub,
-    class_name: "Sub",
+  has_many :post_subs,
+    class_name: "PostSub",
     primary_key: :id,
-    foreign_key: :sub_id
+    foreign_key: :post_id
+
+  has_many :subs,
+    through: :post_subs,
+    source: :sub
 
   belongs_to :author,
     class_name: "User",
     primary_key: :id,
     foreign_key: :author_id
+
 end

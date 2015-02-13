@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     else
 
       log_in_user!(@user)
-      redirect_to user_url(@user.id)
+      redirect_to subs_url
     end
   end
 

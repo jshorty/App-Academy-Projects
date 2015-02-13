@@ -3,15 +3,15 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @sub_id = params[:sub_id]
     render :new
   end
 
   def create
+    
     @post = current_user.posts.new(post_params)
-    @post.sub_id = params[:sub_id]
+
     if @post.save
-      redirect_to sub_post_url(@post.sub_id, @post.id)
+      redirect_to post_url(@post.id)
     else
       flash.now[:errors] = @post.errors.full_messages
       render :new
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to sub_post_url(@post.sub_id, @post.id)
+      redirect_to post_url(@post.id)
     else
       flash.now[:errors] = @post.errors.full_messages
       render :edit
@@ -39,13 +39,13 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :url)
+    params.require(:post).permit(:title, :content, :url, sub_ids: [])
   end
 
   def owns_post
     unless current_user.id == Post.find(params[:id]).author_id
       flash[:errors] = ["You are not the author of this post"]
-      redirect_to sub_post_url(Post.find(params[:id]).sub_id, params[:id])
+      redirect_to post_url(params[:id])
     end
   end
 end

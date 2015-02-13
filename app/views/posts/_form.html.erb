@@ -1,4 +1,4 @@
-<% url = @post.persisted? ? sub_post_url(@post.sub_id, @post.id) : sub_posts_url(@sub_id) %>
+<% url = @post.persisted? ? post_url(@post.id) : posts_url %>
 
 <form  action="<%= url %>" method="post">
   <% if @post.persisted? %>
@@ -20,6 +20,21 @@
   <label for="content">Content</label>
   <br>
   <textarea name="post[content]" id="content"><%= @post.content %></textarea>
+
+  <br><br>
+  <p>Post to at least one sub:</p>
+
+  
+  <% Sub.all.each do |sub| %>
+    <label for="sub"><%= sub.title %></label>
+    <input type="checkbox"
+           name="post[sub_ids][]"
+           id="sub"
+           value="<%= sub.id %>"
+           <%= "checked" if @post.sub_ids.include?(sub.id) %>>
+           <% end %>
+
+
 
   <br><br>
   <input type="submit" value="submit">
