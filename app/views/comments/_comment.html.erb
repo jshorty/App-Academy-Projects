@@ -1,0 +1,17 @@
+
+
+<% if @comment.child_comments %>
+<h5>comments:</h5>
+
+
+<ul>
+  <% @all_comments.each do |comment| %>
+
+    <li><%= comment.content.strip %> -- <a href="<%= comment_url(comment.id) %>"><%= comment.author.username %></a></li>
+
+  <% end %>
+</ul>
+
+
+
+<% end %>

@@ -21,4 +21,11 @@ class Post < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :author_id
 
+  def comments_by_parent_id
+    results = Hash.new {|h,k|}
+    self.comments.each do |comment|
+      results[comment.parent_id] =
+    end
+  end
+
 end

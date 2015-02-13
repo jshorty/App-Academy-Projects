@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    
+
     @post = current_user.posts.new(post_params)
 
     if @post.save
@@ -35,6 +35,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @all_comments = @post.comments
     render :show
   end
 

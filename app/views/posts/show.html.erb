@@ -1,8 +1,4 @@
 <h1><%= @post.title %></h1>
-<h6>posted by <%= @post.author.username %></h6>
-
-<br>
-<br>
 
 <p><%= @post.url %></p>
 
@@ -14,24 +10,30 @@
 <br>
 <br>
 
+<h6>posted by <%= @post.author.username %> on the following subs</h6>
+<% @post.subs.each do |sub| %>
+  <a href="<%= sub_url(sub.id) %>"><h6><%= sub.title %></h6></a>
+<% end %>
+
 <% if @post.author_id == current_user.id %>
   <a href="<%= edit_post_url(@post.id) %>">Edit Post</a>
 <% end %>
 
 <br>
 
-<h4>This post is on the following subs:<h4>
-<% @post.subs.each do |sub| %>
-  <a href="<%= sub_url(sub.id) %>"><%= sub.title %></a>
-<% end %>
+
 
 
 <br><br>
 
 <h5>Comments</h5>
-
-<% @post.comments.each do |comment| %>
-  <p><%= comment.content %> -- <%= comment.author.username %></p>
+<ul>
+<% @all_comments.each do |comment| %>
+  <% unless comment.parent_comment_id %>
+    <li><%= comment.content %> -- <%= comment.author.username %>
+    <a href="<%= comment_url(comment.id) %>">view comment</a></li>
+  <% end %>
 <% end %>
+</ul>
 
 <a href="<%= new_post_comment_url(@post.id) %>">Post a new comment</a>

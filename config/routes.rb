@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     resources :comments, only: :new
   end
   resources :post_subs, only: [:create, :destroy]
-  resources :comments, only: :create
+  resources :comments, only: [:create, :show]
 end
