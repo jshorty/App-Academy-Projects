@@ -11,6 +11,11 @@ class Post < ActiveRecord::Base
     through: :post_subs,
     source: :sub
 
+  has_many :comments,
+    class_name: "Comment",
+    primary_key: :id,
+    foreign_key: :post_id
+
   belongs_to :author,
     class_name: "User",
     primary_key: :id,

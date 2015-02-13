@@ -24,3 +24,14 @@
 <% @post.subs.each do |sub| %>
   <a href="<%= sub_url(sub.id) %>"><%= sub.title %></a>
 <% end %>
+
+
+<br><br>
+
+<h5>Comments</h5>
+
+<% @post.comments.each do |comment| %>
+  <p><%= comment.content %> -- <%= comment.author.username %></p>
+<% end %>
+
+<a href="<%= new_post_comment_url(@post.id) %>">Post a new comment</a>
