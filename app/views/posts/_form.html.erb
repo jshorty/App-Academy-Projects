@@ -1,0 +1,27 @@
+<% url = @post.persisted? ? sub_post_url(@post.sub_id, @post.id) : sub_posts_url(@sub_id) %>
+
+<form  action="<%= url %>" method="post">
+  <% if @post.persisted? %>
+  <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <%= render "layouts/auth_token" %>
+
+  <label for="title">Title</label>
+  <br>
+  <input type="text" name="post[title]" value="<%= @post.title %>" id="title">
+
+  <br><br>
+  <label for="url">URL</label>
+  <br>
+  <input type="text" name="post[url]" value="<%= @post.url %>" id="url">
+
+  <br><br>
+  <label for="content">Content</label>
+  <br>
+  <textarea name="post[content]" id="content"><%= @post.content %></textarea>
+
+  <br><br>
+  <input type="submit" value="submit">
+
+</form>
