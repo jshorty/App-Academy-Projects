@@ -8,10 +8,14 @@
 <% if logged_in? %>
 
   <form action="<%= session_url %>" method="post">
-    <%= render "/auth_token" %>
+    <%= render 'layouts/auth_token' %>
     <input type="hidden" name="_method" value="delete">
     <input type="submit"  value="LogOut">
   </form>
+
+<% else %>
+
+  <a href="<%= new_session_url %>">LogIn</a>
 
 <% end %>
 
