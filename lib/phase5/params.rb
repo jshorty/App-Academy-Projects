@@ -2,37 +2,67 @@ require 'uri'
 
 module Phase5
   class Params
-    # use your initialize to merge params from
-    # 1. query string
-    # 2. post body
-    # 3. route params
-    #
-    # You haven't done routing yet; but assume route params will be
-    # passed in as a hash to `Params.new` as below:
+
     def initialize(req, route_params = {})
+      @params = parse_www_encoded_form(req.query_string)
+
+      unless route_params.empty?
+        @params = safe_merge(@params, route_params)
+      end
+
+      if req.body
+        @params = safe_merge(@params, parse_www_encoded_form(req.body))
+      end
     end
 
     def [](key)
+      @params[key.to_s]
     end
 
     def to_s
       @params.to_json.to_s
     end
 
-    class AttributeNotFoundError < ArgumentError; end;
-
-    private
-    # this should return deeply nested hash
-    # argument format
-    # user[address][street]=main&user[address][zip]=89436
-    # should return
-    # { "user" => { "address" => { "street" => "main", "zip" => "89436" } } }
     def parse_www_encoded_form(www_encoded_form)
+      return {} if www_encoded_form.nil?
+      param_arrays = URI::decode_www_form(www_encoded_form)
+
+      result = {}
+      param_arrays.each do |(key, value)|
+        nested_keys = parse_key(key)
+
+        if nested_keys.length == 1
+          result[nested_keys.first] = value
+          next
+
+        else
+          nested_hash = value
+          until nested_keys.empty? do
+            nested_hash = {nested_keys.pop => nested_hash }
+            puts "BUILDING HASH: #{nested_hash}"
+          end
+
+          result = safe_merge(result, nested_hash)
+        end
+      end
+      result
     end
 
-    # this should return an array
-    # user[address][street] should return ['user', 'address', 'street']
-    def parse_key(key)
+    # allows lossless merge of nested hashes, provided no overlapping core values
+    def safe_merge(hash1, hash2)
+      hash1.merge(hash2) do |k,x,y|
+        if x.is_a?(Hash)
+          safe_merge(x, y)
+        else
+          x
+        end
+      end
     end
+
+    def parse_key(key)
+      key.split(/\]\[|\[|\]/)
+    end
+
+    class AttributeNotFoundError < ArgumentError; end;
   end
 end
