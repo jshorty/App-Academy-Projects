@@ -18,25 +18,27 @@ module Phase6
     def run(req, res)
       route_params = {}
       url_str = pattern.match(req.path).to_s
-      id_pairs = url_str.scan(/(\/\w+\/\d+)/).flatten
+      id_pairs = url_str.scan(/(\/\w+($|\/\d+))/).map(&:first).flatten
 
       #for nested resource, use "id"
       unless id_pairs.empty?
         nested_resource = id_pairs.pop
         match = (/\/(?<id>\d+)/).match(nested_resource)
-        route_params[match.names.first] = match.captures.first
+        unless match.nil?
+          route_params[match.names.first] = match.captures.first
+        end
       end
 
       #for any parent resources, use "resource_id"
       unless id_pairs.empty?
         id_pairs.each do |str|
           match = (/\/(?<obj>\w+)\/(?<id>\d+)/).match(str)
-          id_name = match.names.first.downcase.singularize + "_id"
-          route_params[id_name] = match.captures.first
+          id_name = match[:obj].downcase.singularize + "_id"
+          route_params[id_name] = match[:id]
         end
       end
 
-      debugger
+
       controller_class.new(req, res, route_params).invoke_action(action_name)
     end
   end
