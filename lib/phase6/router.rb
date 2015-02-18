@@ -1,6 +1,6 @@
+require 'active_support/inflector'
+
 module Phase6
-  require 'active_support/inflector'
-  require 'byebug'
   class Route
     attr_reader :pattern, :http_method, :controller_class, :action_name
 
@@ -18,28 +18,38 @@ module Phase6
     def run(req, res)
       route_params = {}
       url_str = pattern.match(req.path).to_s
-      id_pairs = url_str.scan(/(\/\w+($|\/\d+))/).map(&:first).flatten
+      id_pairs = parse_id_pairs(url_str)
 
       #for nested resource, use "id"
       unless id_pairs.empty?
-        nested_resource = id_pairs.pop
-        match = (/\/(?<id>\d+)/).match(nested_resource)
-        unless match.nil?
-          route_params[match.names.first] = match.captures.first
-        end
+        parse_nested_resource(id_pairs.pop, route_params)
       end
 
       #for any parent resources, use "resource_id"
       unless id_pairs.empty?
-        id_pairs.each do |str|
-          match = (/\/(?<obj>\w+)\/(?<id>\d+)/).match(str)
-          id_name = match[:obj].downcase.singularize + "_id"
-          route_params[id_name] = match[:id]
-        end
+        parse_parent_resources(id_pairs, route_params)
       end
 
-
       controller_class.new(req, res, route_params).invoke_action(action_name)
+    end
+
+    def parse_id_pairs(url_str)
+      url_str.scan(/(\/\w+($|\/\d+))/).map(&:first).flatten
+    end
+
+    def parse_parent_resources(id_pairs, route_params)
+      id_pairs.each do |str|
+        match = (/\/(?<obj>\w+)\/(?<id>\d+)/).match(str)
+        id_name = match[:obj].downcase.singularize + "_id"
+        route_params[id_name] = match[:id]
+      end
+    end
+
+    def parse_nested_resource(nested_resource, route_params)
+      match = (/\/(?<id>\d+)/).match(nested_resource)
+      unless match.nil?
+        route_params[match.names.first] = match.captures.first
+      end
     end
   end
 
