@@ -39,7 +39,6 @@ module Phase5
           nested_hash = value
           until nested_keys.empty? do
             nested_hash = {nested_keys.pop => nested_hash }
-            puts "BUILDING HASH: #{nested_hash}"
           end
 
           result = safe_merge(result, nested_hash)
