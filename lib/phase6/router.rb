@@ -40,7 +40,7 @@ module Phase6
     def parse_parent_resources(id_pairs, route_params)
       id_pairs.each do |str|
         match = (/\/(?<obj>\w+)\/(?<id>\d+)/).match(str)
-        id_name = match[:obj].downcase.singularize + "_id"
+        id_name = match[:obj].downcase.singularize + "_id" #!!!
         route_params[id_name] = match[:id]
       end
     end

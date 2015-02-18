@@ -4,8 +4,8 @@ require 'webrick'
 module Phase4
   class Session
     def initialize(req)
-      cookies = req.cookies.select {|cookie| cookie.name == '_rails_lite_app'}
-      cookie = cookies.first
+      @flash = Flash.new
+      cookie = req.cookies.select {|c| c.name == '_rails_lite_app'}.first
 
       if req.cookies.include?(cookie)
         @content = JSON.parse(cookie.value)
@@ -25,6 +25,7 @@ module Phase4
     def store_session(res)
       cookie = WEBrick::Cookie.new('_rails_lite_app', @content.to_json)
       res.cookies << cookie
+      flash_cookie = WEBrick::Cookie.new('_rails_lite_app_flash', @flash,)
     end
   end
 end

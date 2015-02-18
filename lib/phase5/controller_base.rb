@@ -3,11 +3,12 @@ require_relative './params'
 
 module Phase5
   class ControllerBase < Phase4::ControllerBase
-    attr_reader :params
+    attr_reader :params, :flash
 
     def initialize(req, res, route_params = {})
       super(req, res)
       @params = Params.new(req, route_params)
+      @flash = Flash.new
     end
   end
 end
