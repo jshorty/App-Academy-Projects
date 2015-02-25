@@ -40,3 +40,23 @@ li {
 .grid li:hover {
   background: yellow;
 }
+
+.grid li.x:after {
+  content: "X";
+  background: white;
+  color: black;
+  font: sans-serif;
+  font-size: 90px;
+  display: block;
+  text-align: center;
+}
+
+.grid li.o:after {
+  content: "O";
+  background: white;
+  color: black;
+  font: sans-serif;
+  font-size: 90px;
+  display: block;
+  text-align: center;
+}
