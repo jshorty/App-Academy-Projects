@@ -26,9 +26,11 @@
       this.game.swapTurn();
       if (this.game.board.isOver() && this.game.board.winner() === null) {
         alert("Tie game.");
+        this.$el.find("li").off("click");
       }
       else if (this.game.board.isOver()) {
         alert(this.game.board.winner() + " wins!");
+        this.$el.find("li").off("click");
       }
     }
     else {
