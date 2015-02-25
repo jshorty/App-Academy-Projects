@@ -7,6 +7,7 @@
     this.game = game;
     this.$el = $el;
     this.setupBoard();
+    this.bindEvents();
   };
 
   View.prototype.bindEvents = function () {
@@ -39,11 +40,11 @@
   };
 
   View.prototype.setupBoard = function () {
-    this.$el.append("<ul></ul>");
+    this.$el.append("<ul>");
     var $grid = $("ul");
     $grid.addClass("grid group");
     for (var i = 0; i < 9; i++) {
-      var $li = $("<li></li>");
+      var $li = $("<li>");
       $li.attr("pos", i);
       $grid.append($li)
     }
