@@ -5,7 +5,9 @@ window.TrelloClone = {
   Routers: {},
   initialize: function() {
     this.$rootEl = $("#main"),
-    this.router = new TrelloClone.Routers.Router({$rootEl: this.$rootEl});
+    this.$newButton = $(".glyphicon.glyphicon-plus")
+    this.router = new TrelloClone.Routers.Router({$rootEl: this.$rootEl,
+        $newButton: this.$newButton});
     Backbone.history.start();
   }
 };

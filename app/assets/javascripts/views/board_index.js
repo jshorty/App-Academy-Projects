@@ -1,6 +1,5 @@
 TrelloClone.Views.BoardIndex = Backbone.View.extend({
   template: JST["board_index"],
-
   tagName: "ul",
 
   initialize: function (options) {
@@ -28,5 +27,5 @@ TrelloClone.Views.BoardIndex = Backbone.View.extend({
       subview.remove();
     });
     this.subviews = [];
-  }
+  },
 });

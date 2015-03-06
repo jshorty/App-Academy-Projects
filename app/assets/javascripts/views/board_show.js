@@ -14,7 +14,7 @@ TrelloClone.Views.BoardShow = Backbone.View.extend({
       var subview = new TrelloClone.Views.BoardShowItem({model: list});
       console.log(this.subviews);
       this.subviews.push(subview)
-      this.$el.append(subview.render().$el);
+      this.$el.find("ul").append(subview.render().$el);
     }, this)
     return this;
   },
