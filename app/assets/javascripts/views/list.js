@@ -3,13 +3,11 @@ TrelloClone.Views.List = Backbone.CompositeView.extend({
 
   initialize: function (options) {
     this.model = options.model;
-    this.subs = []
   },
 
   tagName: "li",
 
   render: function () {
-    console.log("LIST RENDERED");
     var content = this.template({list: this.model});
     this.$el.html(content);
     this.model.cards().each(function (card) {
