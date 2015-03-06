@@ -1,6 +1,12 @@
+<form id="new-list">
+<input type="text" name="list[title]">
+<input type="hidden" name="list[ord]"
+       value="<%= board.lists().models.length + 1 %>">
+<input type="hidden" name="list[board_id]"
+       value="<%= board.id %>">
+<button>New List</button>
+</form>
+
 <h1><%= board.get('title') %></h1>
 
 <ul id="board"></ul>
-
-<input id="new-list-input" type="text" name="list[title]">
-<button id="new-list-button">New List</button>

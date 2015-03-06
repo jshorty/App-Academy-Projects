@@ -1,9 +1,14 @@
 TrelloClone.Views.Board = Backbone.CompositeView.extend({
   template: JST["board"],
 
+  events: {
+    "submit #new-list": "newList"
+  },
+
   initialize: function (options) {
     this.model = options.model;
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model.lists(), "add", this.render);
   },
 
   render: function () {
@@ -14,12 +19,19 @@ TrelloClone.Views.Board = Backbone.CompositeView.extend({
     }, this)
     return this;
   },
-  //
-  // remove: function () {
-  //   Backbone.View.prototype.remove.call(this);
-  //   this.subviews.forEach(function (subview) {
-  //     subview.remove();
-  //   });
-  //   this.subviews = [];
-  // }
+
+  newList: function (event) {
+    event.preventDefault();
+    var formData = $(event.currentTarget).serializeJSON();
+    var board = this.model
+    var list = new TrelloClone.Models.List(formData);
+    list.save({}, {
+      success: function () {
+        board.lists().add(list)
+      },
+      error: function (errors) {
+        $(event.currentTarget).append(errors)
+      }
+    });
+  }
 })
