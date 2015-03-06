@@ -1,5 +1,5 @@
-TrelloClone.Views.BoardShowItem = Backbone.View.extend({
-  template: JST["board_show_item"],
+TrelloClone.Views.Card = Backbone.CompositeView.extend({
+  template: JST["card"],
 
   initialize: function (options) {
     this.model = options.model;
@@ -8,7 +8,8 @@ TrelloClone.Views.BoardShowItem = Backbone.View.extend({
   tagName: "li",
 
   render: function () {
-    var content = this.template({list: this.model});
+    console.log("CARD RENDERED");
+    var content = this.template({card: this.model});
     this.$el.html(content);
     return this;
   }
