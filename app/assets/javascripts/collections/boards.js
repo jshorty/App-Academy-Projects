@@ -1,7 +1,6 @@
-TrelloClone.Collections.Boards = Backbone.Board.extend({
-  initialize: function (options) {
-    this.model = options.model;
-  },
-
+TrelloClone.Collections.Boards = Backbone.Collection.extend({
+  model: TrelloClone.Models.Board,
   url: "api/boards"
 });
+
+TrelloClone.Collections.boards = new TrelloClone.Collections.Boards();
