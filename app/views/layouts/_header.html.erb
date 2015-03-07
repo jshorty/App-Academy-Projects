@@ -7,13 +7,13 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Trello Clone</a>
+    <a class="navbar-brand" href="#"><img id="jello" src="/jello-logo.png"></a>
   </div>
 
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
     <% if signed_in? %>
-      <li class="navbar-brand"><%= @current_user.email %></li>
+      <li class="navbar-brand"><span><%= @current_user.email %></span></li>
       <li id='add-dropdown' class='dropdown'>
         <button
           class='dropdown-toggle navbar-btn btn btn-primary'

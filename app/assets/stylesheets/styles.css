@@ -1,0 +1,24 @@
+#jello {
+  width: 100px;
+  height: 30px;
+}
+.navbar.navbar-default {
+  background-color: yellow;
+}
+.navbar-btn {
+  background-color: #990000;
+  border: 1px solid #990000;
+}
+.navbar-brand {
+  position: relative;
+}
+li.navbar-brand span {
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  left: -80px;
+}
+a.navbar-brand img {
+  position: absolute;
+  top: 10px;
+}
