@@ -1,3 +1,4 @@
+<h1 id="board-title"><%= board.get('title') %></h1>
 <form id="new-list">
 <input type="text" name="list[title]">
 <input type="hidden" name="list[ord]"
@@ -7,6 +8,6 @@
 <button>New List</button>
 </form>
 
-<h1><%= board.get('title') %></h1>
 
-<ul id="board"></ul>
+
+<ul id="board" class="group"></ul>

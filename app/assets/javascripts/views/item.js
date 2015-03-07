@@ -6,6 +6,7 @@ TrelloClone.Views.Item = Backbone.CompositeView.extend({
   },
 
   tagName: "li",
+  className: "item-container",
 
   render: function () {
     var content = this.template({item: this.model});
