@@ -2,9 +2,13 @@ TrelloClone.Views.BoardIndex = Backbone.CompositeView.extend({
   template: JST["board_index"],
   tagName: "ul",
 
+  events: {
+    "click .delete-board":"deleteBoard"
+  },
+
   initialize: function (options) {
     this.collection = options.collection;
-    this.listenTo(this.collection, "add sync", this.render);
+    this.listenTo(this.collection, "add remove sync", this.render);
   },
 
   render: function () {
@@ -19,4 +23,10 @@ TrelloClone.Views.BoardIndex = Backbone.CompositeView.extend({
 
     return this;
   },
+
+  deleteBoard: function (event) {
+    if (window.confirm("Delete this board?")) {
+      this.collection.get($(event.currentTarget).attr("board")).destroy();
+    }
+  }
 });

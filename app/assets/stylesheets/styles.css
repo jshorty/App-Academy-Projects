@@ -31,6 +31,9 @@ a.navbar-brand img {
 }
 
 /*MAIN*/
+body {
+  position: relative;
+}
 
 body a {
   color: #99FF33;
@@ -69,6 +72,10 @@ body a:hover {
 
 #board-index {
   list-style-type: none;
+}
+
+.delete-board {
+  font-size: 8px;
 }
 
 .list-container {
@@ -140,6 +147,18 @@ body a:hover {
   margin: auto;
 }
 
+.card-container small.delete-card {
+  display: none;
+  float: left;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.card-container:hover small.delete-card {
+  display: block;
+}
+
 .add-item {
   text-align: center;
   color: black;
@@ -169,4 +188,17 @@ body a:hover {
 
 .close {
   font-size: 10px;
+}
+
+.modal-background {
+  background-color: gray;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10;
+}
+
+.modal-window {
+  margin: auto;
+  position: fixed;
+  z-index: 11;
 }

@@ -3,6 +3,7 @@ TrelloClone.Views.Board = Backbone.CompositeView.extend({
 
   events: {
     "submit #new-list": "newList",
+    "click .card-container h4":"openModal"
   },
 
   initialize: function (options) {
@@ -33,5 +34,14 @@ TrelloClone.Views.Board = Backbone.CompositeView.extend({
         $(event.currentTarget).append(errors)
       }
     });
+  },
+
+  openModal: function(event){
+    console.log("CLICK");
+    var cardId = $(event.currentTarget).parent().attr('card-id');
+    var card = new TrelloClone.Models.Card({id: cardId});
+    console.log(card);
+    card.fetch();
+    this.$el.append(new TrelloClone.Views.CardModal({model: card}).render().el)
   },
 })

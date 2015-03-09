@@ -20,21 +20,19 @@ TrelloClone.Views.Item = Backbone.CompositeView.extend({
   },
 
   toggleDone: function (event) {
-    console.log("CHECKED");
-    // if (this.model.get('done')) {
-    //   this.model.set('done', false)
-    // } else {
-    //   this.model.set('done', true)
-    // }
-    // console.log(this.model);
-    // this.model.save();
-
-    // this.card.items().add(this.model, {merge: true})
-    //
-    // this.card.save({
-    //    success: function () {
-    //      console.log(this.card.items());
-    //    }.bind(this)
+    // var title = $(event.currentTarget).attr("item-title");
+    // this.card.items().models.each(function(item) {
+    //   if (item.get('title') = title) {
+    //     var item = item;
+    //   }
     // });
+    // console.log(item);
+    // console.log(item.get('done'));
+    // if (item.get('done')) {
+    //   item.set('done', false);
+    // } else {
+    //   item.set('done', true);
+    // }
+    // item.save();
   }
 });

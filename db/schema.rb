@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716203208) do
+ActiveRecord::Schema.define(version: 20150309210515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20140716203208) do
     t.boolean  "done",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "ord",        default: 0.0
   end
 
   add_index "items", ["card_id"], name: "index_items_on_card_id", using: :btree
