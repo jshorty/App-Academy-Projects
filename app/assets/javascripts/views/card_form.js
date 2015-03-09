@@ -4,7 +4,8 @@ TrelloClone.Views.CardForm = Backbone.CompositeView.extend({
   className: "card-container",
 
   events: {
-    "submit":"submitForm"
+    "submit":"submitForm",
+    "click .close":"remove"
   },
 
   initialize: function (options) {

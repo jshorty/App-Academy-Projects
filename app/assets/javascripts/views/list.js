@@ -24,9 +24,11 @@ TrelloClone.Views.List = Backbone.CompositeView.extend({
   },
 
   createNewCard: function () {
-    this.addSubview("ul.list", new TrelloClone.Views.CardForm({
+    this.openForm && this.openForm.remove();
+    this.openForm = new TrelloClone.Views.CardForm({
       model: new TrelloClone.Models.Card(),
       list: this.model
-    }))
+    })
+    this.addSubview("ul.list", this.openForm)
   }
 });
