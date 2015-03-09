@@ -2,7 +2,8 @@ TrelloClone.Views.List = Backbone.CompositeView.extend({
   template: JST["list"],
 
   events: {
-    "click .add-card":"createNewCard"
+    "click .add-card":"createNewCard",
+    "click .delete":"deleteList"
   },
 
   initialize: function (options) {
@@ -20,6 +21,10 @@ TrelloClone.Views.List = Backbone.CompositeView.extend({
     this.model.cards().each(function (card) {
       this.addSubview("ul.list", new TrelloClone.Views.Card({model: card}));
     }, this)
+
+    this.$(".list").sortable();
+    this.$(".list").disableSelection();
+
     return this;
   },
 
@@ -29,5 +34,11 @@ TrelloClone.Views.List = Backbone.CompositeView.extend({
       list: this.model
     })
     this.addSubview("ul.list", this.openForm)
+  },
+
+  deleteList: function () {
+    if (window.confirm("Delete this list?")) {
+      this.model.destroy();
+    }
   }
 });

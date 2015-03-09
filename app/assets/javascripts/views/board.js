@@ -8,7 +8,7 @@ TrelloClone.Views.Board = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.model = options.model;
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.model.lists(), "add", this.render);
+    this.listenTo(this.model.lists(), "add remove", this.render);
   },
 
   render: function () {

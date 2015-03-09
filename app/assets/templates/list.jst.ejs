@@ -1,4 +1,15 @@
+<small class="delete">X</small>
 <h2><%= list.get('title') %></h2>
-<ul class="list"></ul>
+
+
+<ul class="list" id="sortable"></ul>
+
+<script>
+  $(function() {
+    $( ".list" ).sortable();
+    $( ".list" ).disableSelection();
+  });
+</script>
+
 
 <a class="add-card glyphicon glyphicon-plus"></a>
