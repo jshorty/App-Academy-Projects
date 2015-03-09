@@ -32,6 +32,14 @@ a.navbar-brand img {
 
 /*MAIN*/
 
+body a {
+  color: #99FF33;
+}
+
+body a:hover {
+  color: white;
+}
+
 .group:after {
   display: block;
   content: "";
@@ -55,12 +63,83 @@ a.navbar-brand img {
   border-radius: 10px;
 }
 
+.board-name {
+  font-size: 20px;
+}
+
+#board-index {
+  list-style-type: none;
+}
 
 .list-container {
   display: block;
   float: left;
-  border: 2px solid #99FF33;
+  border: 2px solid white;
   border-radius: 10px;
-  padding: 5px;
   margin: 0px 5px;
+  background-color: #99FF33;
+}
+
+.list-container h2 {
+  text-align: center;
+}
+
+.list-container ul {
+  text-align: center;
+}
+
+.list-container .add-card {
+  display: none;
+}
+
+.list-container:hover .add-card {
+  display: block;
+  margin: auto;
+}
+
+.list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.list ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.card-container {
+  border-top: 2px solid white;
+  padding: 5px;
+}
+
+.card-container .add-item {
+  display: none;
+}
+
+.card-container:hover .add-item {
+  display: block;
+  margin: auto;
+}
+
+.add-item {
+  color: black;
+  font-size: 10px;
+}
+
+.add-item:hover {
+  color: white;
+}
+
+.add-card {
+  color: black;
+  font-size: 16px;
+  padding-left: 40px;
+}
+
+.add-card:hover {
+  color: white;
+}
+
+.centered-link {
+  text-align: center;
 }

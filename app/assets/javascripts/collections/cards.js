@@ -7,4 +7,8 @@ TrelloClone.Collections.Cards = Backbone.Collection.extend({
   initialize: function (_, options) {
     this.list = options.list;
   },
+
+  comparator: function () {
+    return this.get('ord');
+  }
 })

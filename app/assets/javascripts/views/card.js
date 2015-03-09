@@ -12,7 +12,7 @@ TrelloClone.Views.Card = Backbone.CompositeView.extend({
     var content = this.template({card: this.model});
     this.$el.html(content);
     this.model.items().each(function (item) {
-      this.addSubview("ul.card", new TrelloClone.Views.Item({model: item}));
+      this.addSubview("ul.card", new TrelloClone.Views.Item({model: item, card: this.model}));
     }, this)
     return this;
   }

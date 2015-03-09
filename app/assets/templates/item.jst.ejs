@@ -1,1 +1,6 @@
-<h6><%= item.get('title') %></h6><small><%= item.get('done') %></small>
+<input id="card-item-checkbox" type="checkbox"
+  data-title="<%= item.get('title') %>"
+  <% if (item.get('done')) { %>
+    <%= ("checked=true") %>
+  <% } %>>
+<label for="card-item-checkbox"><%= item.get('title') %></label>

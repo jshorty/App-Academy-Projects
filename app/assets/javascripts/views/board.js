@@ -2,7 +2,7 @@ TrelloClone.Views.Board = Backbone.CompositeView.extend({
   template: JST["board"],
 
   events: {
-    "submit #new-list": "newList"
+    "submit #new-list": "newList",
   },
 
   initialize: function (options) {
@@ -33,5 +33,5 @@ TrelloClone.Views.Board = Backbone.CompositeView.extend({
         $(event.currentTarget).append(errors)
       }
     });
-  }
+  },
 })

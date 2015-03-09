@@ -24,5 +24,6 @@ module TrelloClone
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.secret_key_base = "7fdd22df08e24224ab57a10703b49129aca9afebfded0875e28101e675983a04d1741752c8b7a828eadb45bd55a2ab5f047d4cc1a311f6de0709afd1d0e0d74a"
   end
 end
