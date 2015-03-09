@@ -24,7 +24,6 @@ TrelloClone.Views.List = Backbone.CompositeView.extend({
   },
 
   createNewCard: function () {
-    this.openForm && this.openForm.remove();
     this.openForm = new TrelloClone.Views.CardForm({
       model: new TrelloClone.Models.Card(),
       list: this.model

@@ -1,6 +1,13 @@
 module Api
   class ItemsController < ApiController
     def create
+      @item = Item.new(item_params)
+      if @item.save
+        render json: @item
+      else
+        render json: @item.errors.full_messages,
+               status: :unprocessable_entity
+      end
     end
 
     def update
@@ -14,6 +21,10 @@ module Api
     end
 
     def destroy
+    end
+
+    def item_params
+      params.require(:item).permit(:card_id, :title, :id, :done)
     end
   end
 end

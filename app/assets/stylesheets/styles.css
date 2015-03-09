@@ -122,24 +122,32 @@ body a:hover {
 }
 
 .add-item {
+  text-align: center;
   color: black;
   font-size: 10px;
 }
 
 .add-item:hover {
   color: white;
+  text-decoration: none;
 }
 
 .add-card {
+  text-align: center;
   color: black;
   font-size: 16px;
-  padding-left: 40px;
+  margin: auto;
 }
 
 .add-card:hover {
   color: white;
+  text-decoration: none;
 }
 
 .centered-link {
   text-align: center;
+}
+
+.close {
+  font-size: 10px;
 }
