@@ -9,6 +9,7 @@ TrelloClone.Views.Card = Backbone.CompositeView.extend({
     this.model = options.model;
     this.items = this.model.items();
     this.listenTo(this.items, "add remove change:title", this.render)
+    this.$el.attr("card-id", this.model.id)
   },
 
   tagName: "li",
