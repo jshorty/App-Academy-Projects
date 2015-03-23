@@ -1,0 +1,14 @@
+<h1>All Cats</h1>
+
+<ul>
+  <% @cats.each do |cat| %>
+  <li><%= link_to cat.name, cat_url(cat.id) %></li>
+<% end %>
+</ul>
+
+<% if current_user %>
+  <a href="<%= new_cat_url %>">Register your cat for rental</a>
+  <br>
+  <br>
+  <a href="<%= new_cat_rental_request_url %>">Submit a rental request</a>
+<% end %>

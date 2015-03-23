@@ -1,0 +1,66 @@
+<h1><%= @cat.name %></h1>
+
+<table>
+  <tr>
+    <th>Birthday</th>
+    <td><%= @cat.birth_date %></td>
+  </tr>
+  <tr>
+    <th>Age</th>
+    <td><%= @cat.age %></td>
+  </tr>
+  <tr>
+    <th>Color</th>
+    <td><%= @cat.color %></td>
+  </tr>
+  <tr>
+    <th>Sex</th>
+    <td><%= @cat.sex %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= @cat.description %></td>
+  </tr>
+  <tr>
+    <th>Owner</th>
+    <td><%= @cat.owner.user_name %></td>
+  </tr>
+</table>
+<% if @cat.owner == current_user %>
+  <a href="<%=edit_cat_url %>">Edit this cat</a>
+<% else %>
+  <a href="<%= new_cat_rental_request_url %>">Rent a cat today!</a>
+<% end %>
+
+<h2>Requests for <%= @cat.name %>:</h2>
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Request Status</th>
+    <th>Requested By</th>
+  </tr>
+<% @cat.requests.order(:start_date).each do |request| %>
+  <tr>
+    <td><%= request.start_date %></td>
+    <td><%= request.end_date %></td>
+    <td><%= request.status %></td>
+    <td><%= request.user.user_name %></td>
+
+    <% if request.status == "PENDING" && @cat.owner == current_user %>
+    <form action="/approve/<%= request.id %>" method="post">
+      <input type="hidden"
+             name="authenticity_token"
+             value="<%= form_authenticity_token %>">
+      <td><button type="submit">APPROVE</button></td>
+      </form>
+      <form action="/deny/<%= request.id %>" method="post">
+        <input type="hidden"
+               name="authenticity_token"
+               value="<%= form_authenticity_token %>">
+      <td><button type="submit">DENY</button></td>
+    </form>
+    <% end %>
+  </tr>
+<% end %>
+</table>
