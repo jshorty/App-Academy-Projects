@@ -1,0 +1,9 @@
+<h1>Hello World</h1>
+<h4>current user: <%= current_user.username %></h4>
+
+<div id='content'></div>
+<a href="#">Index</a>
+<% if current_user %>
+  <a href="#logout">Log out</a>
+<% end %>
+<script> window.current_user = <%= current_user ? current_user.id : "null" %></script>
