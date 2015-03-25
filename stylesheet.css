@@ -122,8 +122,37 @@ header > .icon-row > a:hover {
   /*overflow: scroll;*/
 }
 
+h2 {
+  display: inline-block;
+  font-size: 36px;
+  margin: 0px 20px 20px 0px;
+}
+
+.content > img {
+  width: 250px;
+  margin: 50px;
+}
+
+.resume-field {
+  margin-bottom: 30px;
+}
+
+.content > .resume-field > .icon-row {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.content > .resume-field > .icon-row > img {
+  width: 45px;
+  height: 40px;
+}
+
+.content > .resume-field > p {
+  margin: 0px 0px 20px 0px;
+}
+
 .nature-art {
-  margin: 83px 50px 0px 0px;
+  margin: 83px 0px 0px 50px;
   width: 150px;
 }
 
