@@ -1,0 +1,7 @@
+
+<input id="card-item-checkbox" type="checkbox"
+  item-title="<%= item.get('title') %>"
+  <% if (item.get('done')) { %>
+    <%= ("checked=true") %>
+  <% } %>>
+<label for="card-item-checkbox"><%= item.get('title') %></label>

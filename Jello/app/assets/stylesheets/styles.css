@@ -1,0 +1,204 @@
+body {
+  background-color: gray;
+  color: black;
+}
+
+/*NAVBAR*/
+
+#jello {
+  width: 100px;
+  height: 30px;
+}
+.navbar.navbar-default {
+  background-color: #99FF33;
+}
+.navbar-btn {
+  background-color: black;
+  border: 1px solid black;
+}
+.navbar-brand {
+  position: relative;
+}
+li.navbar-brand span {
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  left: -80px;
+}
+a.navbar-brand img {
+  position: absolute;
+  top: 10px;
+}
+
+/*MAIN*/
+body {
+  position: relative;
+}
+
+body a {
+  color: #99FF33;
+}
+
+body a:hover {
+  color: white;
+}
+
+.group:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+#board-title {
+  text-align: center;
+}
+
+#new-list {
+  display: block;
+  float: right;
+  padding: 10px;
+}
+
+#new-list button {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+  border-radius: 10px;
+}
+
+.board-name {
+  font-size: 20px;
+}
+
+#board-index {
+  list-style-type: none;
+}
+
+.delete-board {
+  font-size: 8px;
+}
+
+.list-container {
+  min-width: 200px;
+  display: block;
+  float: left;
+  border-radius: 10px;
+  margin: 0px 5px;
+  background-color: #99FF33;
+}
+
+.list-container .delete {
+  display: none;
+  float: left;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.list-container:hover .delete {
+  display: block;
+}
+
+.list-container h2 {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.list-container ul {
+  text-align: center;
+}
+
+.list-container .add-card {
+  display: none;
+}
+
+.list-container:hover .add-card {
+  display: block;
+  margin: auto;
+}
+
+.list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.list ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.card-container {
+  border-top: 2px solid white;
+  border-bottom: 1px solid white;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
+  background-color: #99FF33;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.card-container .add-item {
+  display: none;
+}
+
+.card-container:hover .add-item {
+  display: block;
+  margin: auto;
+}
+
+.card-container small.delete-card {
+  display: none;
+  float: left;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.card-container:hover small.delete-card {
+  display: block;
+}
+
+.add-item {
+  text-align: center;
+  color: black;
+  font-size: 10px;
+}
+
+.add-item:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.add-card {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  margin: auto;
+}
+
+.add-card:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.centered-link {
+  text-align: center;
+}
+
+.close {
+  font-size: 10px;
+}
+
+.modal-background {
+  background-color: gray;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10;
+}
+
+.modal-window {
+  margin: auto;
+  position: fixed;
+  z-index: 11;
+}

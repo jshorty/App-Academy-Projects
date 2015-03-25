@@ -1,0 +1,17 @@
+<form>
+
+<label for="card-title">Title</label>
+<input id="card-title" type="text"
+    name="card[title]" value="<%= card.get('title') %>">
+
+<br>
+
+<label for="card-description">Description</label>
+<input id="card-description" type="text"
+    name="card[description]" value="<%= card.get('description') %>">
+
+<button>New Card</button>
+
+</form>
+
+<small class="close">Close</small>
