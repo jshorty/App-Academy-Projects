@@ -1,0 +1,24 @@
+<h3> Comment by <%= @comment.author.username %></h3>
+
+<p><%= @comment.content %></p>
+
+<% if @comment.child_comments %>
+<h4>comments:</h4>
+
+
+<ul>
+  <% @comment.child_comments.each do |comment| %>
+
+    <li><%= comment.content.strip %> -- <a href="<%= comment_url(comment.id) %>"><%= comment.author.username %></a></li>
+
+  <% end %>
+</ul>
+
+
+
+<% end %>
+
+<%= render 'form' %>
+<br>
+<br>
+<a href="<%= post_url(@comment.post_id) %>"><< Back to post</a>

@@ -1,0 +1,30 @@
+<% if @user.persisted?%>
+  <% url = user_url(@user.id) %>
+<% elsif @session %>
+  <% url = session_url %>
+<% else %>
+  <% url = users_url %>
+<% end %>
+
+<form action="<%= url %>" method="post">
+  <%= render 'layouts/auth_token' %>
+
+  <% if @user.persisted? %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="username">Username:</label>
+  <br>
+  <input type="text"
+         id="username"
+         name="user[username]"
+         value="<%=@user.username %>">
+         <br><br>
+  <label for="password">Password:</label>
+  <br>
+  <input type="password"
+         id="password"
+         name="user[password]">
+         <br><br>
+  <button>Submit</button>
+</form>

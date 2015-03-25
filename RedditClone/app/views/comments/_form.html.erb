@@ -1,0 +1,19 @@
+<br>
+<br>
+<br>
+<br>
+
+<h4>New Comment</h4>
+
+
+<form action="<%=comments_url%>" method="post">
+  <%= render "layouts/auth_token" %>
+  <input type="hidden" name="comment[post_id]" value="<%= @comment.post_id %>">
+  <label for="content"></label>
+  <textarea name="comment[content]" id="content"><%= @comment.content %></textarea>
+  <br>
+  <% if @comment.id %>
+    <input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>">
+  <% end %><br>
+  <input type="submit" value="submit">
+</form>
