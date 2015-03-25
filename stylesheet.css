@@ -83,7 +83,7 @@ header > .icon-row > a:last-of-type {
 }
 
 header > .icon-row > a:hover {
-  -webkit-animation: pulse 5s infinite alternate;
+  -webkit-animation: pulse 10s infinite alternate;
 }
 
 /* SIDEBAR */
@@ -101,16 +101,35 @@ header > .icon-row > a:hover {
   margin-bottom: 10px;
   font-family: Dosis;
   font-size: 36px;
-  text-align: right;
+  float: right;
   cursor: pointer;
+  transition: color 0.5s linear;
+}
+
+#sidebar > .link-list > li:hover {
+  -webkit-animation: pulse 10s infinite alternate;
 }
 
 /* CONTENT */
 
-#content {
+.content {
   float: right;
+  width: 610px;
+  height: 410px;
+  padding: 20px;
+  background: white;
+  font-family: Lato, sans-serif;
+  /*overflow: scroll;*/
+}
+
+.nature-art {
+  margin: 83px 50px 0px 0px;
+  width: 150px;
+}
+
+.nature-art-wide {
+  margin-top: 40px;
   width: 650px;
-  height: 450px;
 }
 
 /* FOOTER */
@@ -125,16 +144,17 @@ footer {
 
 
 /*EFFECTS*/
+
 @-webkit-keyframes pulse {
   0% {color: #669999;}
-  25% {color: #9900CC;}
-  50% {color: #CC6600;}
-  75% {color: #339900;}
-  100% {color: #CCCC00;}
+  20% {color: #CC6600;}
+  40% {color: #9900CC;}
+  60% {color: #339900;}
+  80% {color: #CC0000;}
+  100% {color: #0000CC;}
 }
 
-/* Hover Effects by Ian Lunn http://ianlunn.github.io/Hover/ */
-/* Grow */
+/* Grow from Hover by Ian Lunn (http://ianlunn.github.io/Hover/) */
 .hvr-grow {
   display: inline-block;
   vertical-align: middle;
