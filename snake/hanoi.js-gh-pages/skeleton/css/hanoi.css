@@ -1,0 +1,69 @@
+/*RESET AND CLEARFIX */
+
+body, ul, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+li {
+  list-style: none;
+}
+
+/* BOARD */
+
+.pile {
+  background: gray;
+  float: left;
+  margin: 100px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.pile.selected {
+  border: 5px solid yellow;
+}
+
+.pile > li {
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  border: 1px solid black;
+}
+
+.pile > li.one:after {
+  display: block;
+  background: #eee;
+  font: san-serif;
+  font-size: 100px;
+  content: "1";
+  text-align: center;
+}
+
+.pile > li.two:after {
+  display: block;
+  background: #eee;
+  font: san-serif;
+  font-size: 100px;
+  content: "2";
+  text-align: center;
+}
+
+.pile > li.three:after {
+  display: block;
+  background: #eee;
+  font: san-serif;
+  font-size: 100px;
+  content: "3";
+  text-align: center;
+}

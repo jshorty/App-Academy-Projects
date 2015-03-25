@@ -1,0 +1,62 @@
+/*RESET AND CLEARFIX */
+
+body, ul, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+li {
+  list-style: none;
+}
+
+/* GRID */
+
+.grid {
+  width: 300px;
+  margin: auto;
+  border: 5px solid black;
+  margin-top: 100px;
+}
+
+.grid li {
+  width: 90px;
+  height: 90px;
+  border: 5px solid black;
+  float: left;
+  background: gray;
+}
+
+.grid li:hover {
+  background: yellow;
+}
+
+.grid li.x:after {
+  content: "X";
+  background: white;
+  color: black;
+  font: sans-serif;
+  font-size: 90px;
+  display: block;
+  text-align: center;
+}
+
+.grid li.o:after {
+  content: "O";
+  background: white;
+  color: black;
+  font: sans-serif;
+  font-size: 90px;
+  display: block;
+  text-align: center;
+}
