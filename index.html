@@ -7,12 +7,13 @@
   <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="swap_content.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Dosis:800' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <header>
-    <h1><a href="index.html">JACOB SHORTY</a></h1>
+    <h1><a id="home" class="page-link" href="index.html">JACOB SHORTY</a></h1>
     <div class="icon-row">
       <a title="Email" href="mailto:jakeshorty@gmail.com?Subject=Hello%20there">
         <i class="fa fa-envelope-square fa-lg hvr-grow"></i>
@@ -37,14 +38,14 @@
   <section id="main" class="group">
     <section id="sidebar">
       <ul class="link-list group">
-        <li class="hvr-grow">ABOUT</li>
-        <li class="hvr-grow">RESUME</li>
-        <li class="hvr-grow">CHICKADEE</li>
-        <li class="hvr-grow">PROJECTS</li>
-        <li class="hvr-grow">BLOG</li>
+        <li id="about" class="page-link">ABOUT</li>
+        <li id="resume" class="page-link">RESUME</li>
+        <li id="chickadee" class="page-link">CHICKADEE</li>
+        <li id="projects" class="page-link">PROJECTS</li>
+        <li id="blog" class="page-link">BLOG</li>
       </ul>
     </section>
-    <!-- <section class="content home">
+    <section class="content home">
       <p>
         I'm a web developer based in NYC. Coming from a background in
         bird ecology, I most recently worked supporting arts and outdoor
@@ -55,17 +56,15 @@
       <img class="nature-art" title="chanterelle mushroom" src="static/chanterelle.png">
       <img class="nature-art" title="ascophyllum rockweed" src="static/ascophyllum.png">
       <img class="nature-art" title="spruce tree" src="static/spruce.png">
-    </section> -->
+    </section>
 
-    <!-- <section class="content about">
+    <section class="content about hidden">
       <p>
         I'm a web developer based in NYC. In 2012 I graduated from
         Bowdoin College in my home state of Maine, where I studied
         biology and spent a lot of time researching an
         <a href="http://en.wikipedia.org/wiki/Rock_gunnel">amphibious fish</a>.
-        While working at a remote island field stationI
-        became enamored with bird ecology, and after graduating I
-        worked as part of several avian research and stewardship efforts.
+        After graduating I worked as part of several avian research and stewardship efforts.
         I then worked for a great organization called
         <a href="http://www.creativetrails.org/">Creative Trails</a>,
         where I helped to provide outdoor and nature-oriented programming
@@ -86,19 +85,31 @@
         </a>.
       </p>
       <img class="nature-art-wide" title="rock gunnel" src="static/gunnel.png">
-    </section> -->
+    </section>
 
-    <!-- <section class="content resume">
+    <section class="content resume hidden">
       <section class="resume-field">
         <h2>Education and experience</h2>
         <p>
           Check out this PDF of my <a href="#">resume</a> or visit
-          me on <a href="http://www.linkedin.com/in/jshorty">LinkedIn</a>
-          (Gotta keep things DRY!). References available upon request.
+          me on <a href="http://www.linkedin.com/in/jshorty">LinkedIn.</a>
+          (Gotta keep things DRY!) References available upon request.
         </p>
       </section>
       <section class="resume-field">
         <h2>Languages and technologies</h2>
+        <p><strong>WEB DEVELOPMENT:</strong>
+          Ruby, Rails, JavaScript, Backbone.js,
+          jQuery, HTML5, CSS3, SQL, PostgresQL,
+          Python, Flask, Rspec, TDD
+        </p>
+        <p><strong>ANALYSIS:</strong>
+          Statistical analysis with R and SPSS, scientific research,
+          ArcGIS
+        </p>
+        <p><strong>DESIGN:</strong>
+          Adobe Illustrator, Adobe Photoshop
+        </p>
         <div class="icon-row">
           <img src="skill_icons/ruby.png">
           <img src="skill_icons/rails.jpg">
@@ -109,23 +120,11 @@
           <img src="skill_icons/html.png">
           <img src="skill_icons/css.png">
         </div>
-        <p><strong>Web Development:</strong>
-          Ruby, Rails, JavaScript, Backbone.js,
-          jQuery, HTML5, CSS3, SQL, PostgresQL,
-          Python, Flask, Rspec, TDD
-        </p>
-        <p><strong>Analysis</strong>
-          Statistical analysis with R and SPSS, scientific research,
-          ArcGIS
-        </p>
-        <p><strong>Design:</strong>
-          Adobe Illustrator, Adobe Photoshop
-        </p>
       </section>
-    </section> -->
+    </section>
 
-    <section class="content chickadee">
-      <h2>Chickadee <small>Know what you hear in nature.<h2>
+    <section class="content chickadee hidden">
+      <h2>Chickadee <small>know what you hear in nature.<h2>
       <div class="chickadee-links">
         <a href="http://www.chickadee.io">www.chickadee.io</a>
         <a href="https://github.com/jshorty/zen-petri-dish">GITHUB</a>
@@ -149,12 +148,12 @@
         audio recordings of relevant species from
         <a href="http://xeno-canto.org">Xeno-canto's</a> library.
         Chickadee allows users to custom-tailor their experience,
-        studying birds from the regions of their choosing.
+        studying birds from their regions of choice.
         <a href="http://www.chickadee.io">Check it out!</a>
       </p>
     </section>
 
-    <!-- <section class="content projects">
+    <section class="content projects hidden">
       <h2>Projects</h2>
       <div class="project-info">
         <p class="alert">First, please check out <strong>Chickadee</strong>,
@@ -204,16 +203,16 @@
           reports of owls in North America.
         </p>
       </div>
-    </section> -->
+    </section>
 
-    <!-- <section class="content blog">
+    <section class="content blog hidden">
       <h2>Coming Soon!</h2>
       <p>
         I'll port over the blog content from my old site
         when I get the chance.
       </p>
-      <img src="static/in-progress.png">
-    </section> -->
+      <img class="in-progress" src="static/in-progress.png">
+    </section>
   </section>
   <footer>
     <small>Jacob Shorty 2015. Icons by

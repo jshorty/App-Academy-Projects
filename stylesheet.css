@@ -43,6 +43,10 @@ a {
   min-height: 450px;
 }
 
+.hidden {
+  display: none;
+}
+
 /* HEADER */
 
 header {
@@ -127,11 +131,12 @@ h2 {
 }
 
 h2 > small {
-  margin-left: 30px;
+  display: block;
+  margin-left: 5px;
   font-size: 12px;
 }
 
-.content > img {
+.content > img.in-progress {
   width: 250px;
   margin: 50px;
 }
@@ -215,19 +220,19 @@ h2 > small {
   margin: 0px 0px 20px 0px;
 }
 
-.nature-art {
+.content > .nature-art {
   margin: 83px 0px 0px 50px;
   width: 150px;
 }
 
-.nature-art-wide {
+.content > .nature-art-wide {
   margin-top: 40px;
   width: 650px;
 }
 
 .chickadee-links {
   display: inline-block;
-  margin-bottom: 20px;
+  margin: 20px 0px 40px 0px;
 }
 
 .chickadee-links > a {
@@ -241,7 +246,7 @@ h2 > small {
 
 .feature-list {
   float: left;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .feature-list li {
