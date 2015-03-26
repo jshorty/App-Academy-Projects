@@ -115,11 +115,9 @@ header > .icon-row > a:hover {
 .content {
   float: right;
   width: 610px;
-  height: 410px;
   padding: 20px;
   background: white;
   font-family: Lato, sans-serif;
-  /*overflow: scroll;*/
 }
 
 h2 {
@@ -128,13 +126,79 @@ h2 {
   margin: 0px 20px 20px 0px;
 }
 
+h2 > small {
+  margin-left: 30px;
+  font-size: 12px;
+}
+
 .content > img {
   width: 250px;
   margin: 50px;
 }
 
-.resume-field {
+.resume-field, .project-info {
   margin-bottom: 30px;
+}
+
+.alert {
+  font-size: 20px;
+}
+
+.project-info > .project-header {
+  border-bottom: 2px solid #000;
+  margin-bottom: 10px;
+}
+
+.project-info > .project-header > strong {
+  display: inline-block;
+  float: left;
+  width: 250px;
+}
+
+.project-info > .project-header > p {
+  float: right;
+}
+
+.screenshot-large {
+  float: left;
+  width: 150px;
+  margin-bottom: 20px;
+  border: 3px solid #000;
+  border-radius: 10px;
+}
+
+.project-info > .screenshot {
+  float: left;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.project-info > .project-links {
+  float: right;
+  margin: 10px 0px 60px 0px;
+}
+
+.project-info > .project-links > a{
+  position: relative;
+  margin-left: 10px;
+  text-decoration: none;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.project-info > .project-links > a:hover {
+  -webkit-animation: pulse 10s infinite alternate;
+  box-shadow: -1px 1px 1px 0px;
+}
+
+.project-info > .project-description {
+  position: relative;
+  display: block;
+  width: 300px;
+  font-size: 16px;
+  top: 10px;
+  left: 10px;
 }
 
 .content > .resume-field > .icon-row {
@@ -159,6 +223,30 @@ h2 {
 .nature-art-wide {
   margin-top: 40px;
   width: 650px;
+}
+
+.chickadee-links {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.chickadee-links > a {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.chickadee-description {
+  font-size: 16px;
+}
+
+.feature-list {
+  float: left;
+  margin-left: 20px;
+}
+
+.feature-list li {
+  font-size: 16px;
+  margin-top: 5px;
 }
 
 /* FOOTER */
