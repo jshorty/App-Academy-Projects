@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 2015 Jacob Shorty. Feel free to use my HTML as a template, just
+       change it enough so that we don't have the same website... -->
+  <title>Jacob Shorty</title>
+  <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="swap_content.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Dosis:800' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <header>
+    <h1><a id="home" class="page-link" href="index.html">JACOB SHORTY</a></h1>
+    <div class="icon-row">
+      <a title="Email" href="mailto:jakeshorty@gmail.com?Subject=Hello%20there">
+        <i class="fa fa-envelope-square fa-lg hvr-grow"></i>
+      </a>
+      <a title="LinkedIn" href="http://www.linkedin.com/in/jshorty">
+        <i class="fa fa-linkedin-square fa-lg hvr-grow"></i>
+      </a>
+      <a title="GitHub" href="http://github.com/jshorty">
+        <i class="fa fa-github fa-lg hvr-grow"></i>
+      </a>
+      <a title="Stack Overflow" href="http://stackoverflow.com/users/3583511/j-thomas-shorty">
+        <i class="fa fa-stack-overflow fa-lg hvr-grow"></i>
+      </a>
+      <a title="Flickr" href="http://www.flickr.com/photos/jtshorty/">
+        <i class="fa fa-flickr fa-lg hvr-grow"></i>
+      </a>
+      <a title="SoundCloud" href="http://soundcloud.com/jtshorty">
+        <i class="fa fa-soundcloud fa-lg hvr-grow"></i>
+      </a>
+    </div>
+  </header>
+  <section id="main" class="group">
+    <section id="sidebar">
+      <ul class="link-list group">
+        <li id="about" class="page-link">ABOUT</li>
+        <li id="resume" class="page-link">RESUME</li>
+        <li id="chickadee" class="page-link">CHICKADEE</li>
+        <li id="projects" class="page-link">PROJECTS</li>
+        <li id="blog" class="page-link">BLOG</li>
+      </ul>
+    </section>
+    <section class="content home">
+      <p>
+        I'm a web developer based in NYC. Coming from a background in
+        bird ecology, I most recently worked supporting arts and outdoor
+        programming for adults with developmental disabilities. I'm passionate
+        about the natural world and people, and I love building
+        things in the digital world that bring the two closer together.
+      </p>
+      <img class="nature-art" title="chanterelle mushroom" src="static/chanterelle.png">
+      <img class="nature-art" title="ascophyllum rockweed" src="static/ascophyllum.png">
+      <img class="nature-art" title="spruce tree" src="static/spruce.png">
+    </section>
+
+    <section class="content about hidden">
+      <p>
+        I'm a web developer based in NYC. In 2012 I graduated from
+        Bowdoin College in my home state of Maine, where I studied
+        biology and spent a lot of time researching an
+        <a href="http://en.wikipedia.org/wiki/Rock_gunnel">amphibious fish</a>.
+        After graduating I worked as part of several avian research and stewardship efforts.
+        I then worked for a great organization called
+        <a href="http://www.creativetrails.org/">Creative Trails</a>,
+        where I helped to provide outdoor and nature-oriented programming
+        (as well as music and art) to adults with intellectual uniqueness.
+      </p>
+      <br>
+      <p>
+        During that time, I built my first web application with
+        Python and the Flask framework. Since then, I've been studying
+        web development voraciously. I moved to New York and participated
+        in App Academy's intensive 12-week program for the full-stack,
+        where I coded round the clock, gained fluency with new
+        <a href="resume.html">languages and technologies</a>, and became
+        familiar with best practices working under varied conditions.
+        I'm excited to build great things on the web with you!
+        <a href="mailto:jakeshorty@gmail.com?Subject=Hello%20there">
+          Shoot me an email
+        </a>.
+      </p>
+      <img class="nature-art-wide" title="rock gunnel" src="static/gunnel.png">
+    </section>
+
+    <section class="content resume hidden">
+      <section class="resume-field">
+        <h2>Education and experience</h2>
+        <p>
+          Check out this PDF of my <a href="#">resume</a> or visit
+          me on <a href="http://www.linkedin.com/in/jshorty">LinkedIn.</a>
+          (Gotta keep things DRY!) References available upon request.
+        </p>
+      </section>
+      <section class="resume-field">
+        <h2>Languages and technologies</h2>
+        <p><strong>WEB DEVELOPMENT:</strong>
+          Ruby, Rails, JavaScript, Backbone.js,
+          jQuery, HTML5, CSS3, SQL, PostgresQL,
+          Python, Flask, Rspec, TDD
+        </p>
+        <p><strong>ANALYSIS:</strong>
+          Statistical analysis with R and SPSS, scientific research,
+          ArcGIS
+        </p>
+        <p><strong>DESIGN:</strong>
+          Adobe Illustrator, Adobe Photoshop
+        </p>
+        <div class="icon-row">
+          <img src="skill_icons/ruby.png">
+          <img src="skill_icons/rails.jpg">
+          <img src="skill_icons/js.png">
+          <img src="skill_icons/backbone.png">
+          <img src="skill_icons/jquery.gif">
+          <img src="skill_icons/postgres.svg">
+          <img src="skill_icons/html.png">
+          <img src="skill_icons/css.png">
+        </div>
+      </section>
+    </section>
+
+    <section class="content chickadee hidden">
+      <h2>Chickadee <small>know what you hear in nature.<h2>
+      <div class="chickadee-links">
+        <a href="http://www.chickadee.io">www.chickadee.io</a>
+        <a href="https://github.com/jshorty/zen-petri-dish">GITHUB</a>
+      </div>
+      <div class="features group">
+        <img class="screenshot-large" src="static/chickadee.png">
+        <ul class="feature-list">
+          <li><strong>FEATURES:</strong></li>
+          <li>Backbone client-side consuming RESTful Rails API<li>
+          <li>responsive design and layout with jQuery & CSS</li>
+          <li>asynchronous UI management during AJAX requests<li>
+          <li>media storage with Amazon Web Service's S3<li>
+          <li>Omniauth with Facebook</li>
+        <ul>
+      </div>
+      <p class="chickadee-description">
+        Chickadee is a quiz application for learning to identify birds
+        by their songs. It harnesses bird demographic data collected
+        by citizen scientists from the Cornell Laboratory of Ornithology's
+        <a href="http://ebird.org">eBird</a> database, as well as
+        audio recordings of relevant species from
+        <a href="http://xeno-canto.org">Xeno-canto's</a> library.
+        Chickadee allows users to custom-tailor their experience,
+        studying birds from their regions of choice.
+        <a href="http://www.chickadee.io">Check it out!</a>
+      </p>
+    </section>
+
+    <section class="content projects hidden">
+      <h2>Projects</h2>
+      <div class="project-info">
+        <p class="alert">First, please check out <strong>Chickadee</strong>,
+          my largest project built with Backbone.js and Rails.
+        </p>
+      </div>
+      <div class="project-info group">
+        <div class="project-header group">
+          <strong>ZEN PETRI DISH</strong>
+          <p>JavaScript & HTML Canvas</p>
+        </div>
+        <img class="screenshot" src="static/germs.png">
+        <div class="project-links">
+          <a href="http://jshorty.com/germs">PLAY NOW!</a>
+          <a href="https://github.com/jshorty/zen-petri-dish">GITHUB</a>
+        </div>
+        <p class="project-description">
+          Arcade-style browser game; life is simpler when you're microscopic.
+        </p>
+      </div>
+      <div class="project-info group">
+        <div class="project-header group">
+          <strong>CHESS</strong>
+          <p>Ruby for CLI</p>
+        </div>
+        <img class="screenshot" src="static/chess.png">
+        <div class="project-links">
+          <a href="https://github.com/jshorty/chess">GITHUB</a>
+        </div>
+        <p class="project-description">
+          Pure Ruby game for the command line.
+          Will try to get you with Fool's Mate!
+        </p>
+      </div>
+      <div class="project-info group">
+        <div class="project-header group">
+          <strong>OWLWIRE</strong>
+          <p>Python & Flask</p>
+        </div>
+        <img class="screenshot" src="static/owlwire.png">
+        <div class="project-links">
+          <a href="http://jshorty.pythonanywhere.com">LIVE</a>
+          <a href="https://github.com/jshorty/owlwire">GITHUB</a>
+        </div>
+        <p class="project-description">
+          Lightweight, single-page web app that finds the most recent
+          reports of owls in North America.
+        </p>
+      </div>
+    </section>
+
+    <section class="content blog hidden">
+      <h2>Coming Soon!</h2>
+      <p>
+        I'll port over the blog content from my old site
+        when I get the chance.
+      </p>
+      <img class="in-progress" src="static/in-progress.png">
+    </section>
+  </section>
+  <footer>
+    <small>Jacob Shorty 2015. Icons by
+      <a href="http://fortawesome.github.io/Font-Awesome">
+        FontAwesome
+      </a>.
+    </small>
+  </footer>
+</body>
+</html>
